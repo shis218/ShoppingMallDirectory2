@@ -1,0 +1,304 @@
+@prefix : <http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory> .
+
+<http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory> rdf:type owl:Ontology ;
+                                                                            owl:imports <http://xmlns.com/foaf/0.1/> .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#max
+:max rdf:type owl:AnnotationProperty ;
+     rdfs:subPropertyOf rdfs:label .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#min
+:min rdf:type owl:AnnotationProperty ;
+     rdfs:subPropertyOf rdfs:label .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#hasActivity
+:hasActivity rdf:type owl:ObjectProperty ;
+             owl:inverseOf :isThemeOf .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#hosts
+:hosts rdf:type owl:ObjectProperty ;
+       owl:inverseOf :isLocatedOn .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#isExactly
+:isExactly rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#isLocatedOn
+:isLocatedOn rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#isSoldAt
+:isSoldAt rdf:type owl:ObjectProperty ;
+          owl:inverseOf :sells .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#isThemeOf
+:isThemeOf rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#madeBy
+:madeBy rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#ofProd
+:ofProd rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#sells
+:sells rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#hasCode
+:hasCode rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#hasPhoneNumber
+:hasPhoneNumber rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#hasProdName
+:hasProdName rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#hasQuantity
+:hasQuantity rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#price
+:price rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#wasDiscounted
+:wasDiscounted rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#gml:posX
+:gml:posX rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#gml:posY
+:gml:posY rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#gml:posZ
+:gml:posZ rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#Activity
+:Activity rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty :isThemeOf ;
+                            owl:someValuesFrom :Store
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty <http://xmlns.com/foaf/0.1/name> ;
+                            owl:cardinality "1"^^xsd:nonNegativeInteger
+                          ] .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#Customer
+:Customer rdf:type owl:Class ;
+          rdfs:subClassOf <http://www.w3.org/2000/10/swap/pim/contact#Person> ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :isExactly ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass <http://www.w3.org/2000/10/swap/pim/contact#Person>
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasPhoneNumber ;
+                            owl:someValuesFrom xsd:int
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty <http://xmlns.com/foaf/0.1/accountName> ;
+                            owl:cardinality "1"^^xsd:nonNegativeInteger
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty <http://xmlns.com/foaf/0.1/name> ;
+                            owl:cardinality "1"^^xsd:nonNegativeInteger
+                          ] .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#Mall
+:Mall rdf:type owl:Class ;
+      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                        owl:onProperty :hosts ;
+                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :Store
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty <http://xmlns.com/foaf/0.1/name> ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange owl:rational
+                      ] ;
+      rdfs:comment "A place that hosts Stores" .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#Product
+:Product rdf:type owl:Class ;
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty :isSoldAt ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :Store
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasCode ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:int
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasProdName ;
+                           owl:cardinality "1"^^xsd:nonNegativeInteger
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasQuantity ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:int
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :price ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onDataRange xsd:double
+                         ] .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#Purchase
+:Purchase rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty :madeBy ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Customer
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :ofProd ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :Product
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasQuantity ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:int
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :price ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:double
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :wasDiscounted ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:boolean
+                          ] ;
+          rdfs:isDefinedBy :Client ,
+                           :Product .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#Store
+:Store rdf:type owl:Class ;
+       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                         owl:onProperty :sells ;
+                         owl:someValuesFrom :Product
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasActivity ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Activity
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :isLocatedOn ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Mall
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty <http://xmlns.com/foaf/0.1/name> ;
+                         owl:cardinality "1"^^xsd:nonNegativeInteger
+                       ] .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#IndoorNavi:RouteSegmentType
+:IndoorNavi:RouteSegmentType rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#gml:PointPropertyType
+:gml:PointPropertyType rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#gml:point
+:gml:point rdf:type owl:Class ;
+           rdfs:subClassOf :gml:PointPropertyType ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :gml:posX ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange owl:rational
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :gml:posY ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange owl:rational
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :gml:posZ ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange owl:rational
+                           ] .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoorcore:StateType
+:indoorcore:StateType rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoorcore:externalObjectReferenceType
+:indoorcore:externalObjectReferenceType rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoorgml:RouteNodeType
+:indoorgml:RouteNodeType rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoornavi:RouteNodeMemberType
+:indoornavi:RouteNodeMemberType rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoornavi:RouteNodeType
+:indoornavi:RouteNodeType rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoornavi:RouteNodesType
+:indoornavi:RouteNodesType rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoornavi:RouteType
+:indoornavi:RouteType rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoornavi:path
+:indoornavi:path rdf:type owl:Class .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

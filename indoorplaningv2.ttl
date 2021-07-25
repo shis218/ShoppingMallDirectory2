@@ -1,0 +1,760 @@
+@prefix : <https://blindop.herokuapp.com/indoorplaning#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning> .
+
+<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning> rdf:type owl:Ontology ;
+                                                                       owl:imports <http://xmlns.com/foaf/0.1/> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://blindop.herokuapp.com/indoorplaning#AssociationAttributeGroup
+:AssociationAttributeGroup rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#Geometry2D
+:Geometry2D rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#Geometry3D
+:Geometry3D rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#RouteNode
+:RouteNode rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#StateType
+:StateType rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#cellSpaceGeometry
+:cellSpaceGeometry rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#class
+:class rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#connects
+:connects rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#duality
+:duality rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#edges
+:edges rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#endRouteNode
+:endRouteNode rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#externalObject
+:externalObject rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#externalReference
+:externalReference rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#function
+:function rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#geometry
+:geometry rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#hasRestriction
+:hasRestriction rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#hasrestriction
+:hasrestriction rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#interEdges
+:interEdges rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#interLayerConnectionMember
+:interLayerConnectionMember rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#nodemember
+:nodemember rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#nodes
+:nodes rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#partialboundedBy
+:partialboundedBy rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#path
+:path rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#point
+:point rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#referencedState
+:referencedState rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#referencedTransition
+:referencedTransition rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#routeNodes
+:routeNodes rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#routemember
+:routemember rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#spacelayers
+:spacelayers rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#startRouteNode
+:startRouteNode rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#usage
+:usage rdf:type owl:ObjectProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:IsLocatedAt
+:idp:IsLocatedAt rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://blindop.herokuapp.com/indoorplaning#informationSystem
+:informationSystem rdf:type owl:DatatypeProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#job
+:job rdf:type owl:DatatypeProperty ;
+     rdfs:range xsd:string .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#level
+:level rdf:type owl:DatatypeProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#name
+:name rdf:type owl:DatatypeProperty ;
+      rdfs:subPropertyOf owl:topDataProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#uri
+:uri rdf:type owl:DatatypeProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#weight
+:weight rdf:type owl:DatatypeProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#gml:pos
+:gml:pos rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf owl:topDataProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#gml:posX
+:gml:posX rdf:type owl:DatatypeProperty ;
+          rdfs:range xsd:double .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#gml:posY
+:gml:posY rdf:type owl:DatatypeProperty ;
+          rdfs:range xsd:double .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:coordenadaX
+:idp:coordenadaX rdf:type owl:DatatypeProperty ;
+                 rdfs:range xsd:int .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:coordenadaXFim
+:idp:coordenadaXFim rdf:type owl:DatatypeProperty ;
+                    rdfs:range xsd:int .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:coordenadaXInicio
+:idp:coordenadaXInicio rdf:type owl:DatatypeProperty ;
+                       rdfs:range xsd:int .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:coordenadaY
+:idp:coordenadaY rdf:type owl:DatatypeProperty ;
+                 rdfs:range xsd:int .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:coordenadaYFim
+:idp:coordenadaYFim rdf:type owl:DatatypeProperty ;
+                    rdfs:range xsd:int .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:coordenadaYinicio
+:idp:coordenadaYinicio rdf:type owl:DatatypeProperty ;
+                       rdfs:range xsd:int .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:coordenadaZ
+:idp:coordenadaZ rdf:type owl:DatatypeProperty ;
+                 rdfs:range xsd:int .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:coordenadaZFim
+:idp:coordenadaZFim rdf:type owl:DatatypeProperty ;
+                    rdfs:range xsd:int .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:coordenadaZInicio
+:idp:coordenadaZInicio rdf:type owl:DatatypeProperty ;
+                       rdfs:range xsd:int .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:key
+:idp:key rdf:type owl:DatatypeProperty ;
+         rdfs:domain <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp::person> ;
+         rdfs:range xsd:int .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:nome
+:idp:nome rdf:type owl:DatatypeProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:obstacleSize
+:idp:obstacleSize rdf:type owl:DatatypeProperty ;
+                  rdfs:range xsd:float .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:walkable
+:idp:walkable rdf:type owl:DatatypeProperty ;
+              rdfs:range xsd:boolean .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:creationDate
+:indoorcore:creationDate rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:simpletype
+:indoorcore:simpletype rdf:type owl:DatatypeProperty ;
+                       rdfs:range xsd:string .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:terminationDate
+:indoorcore:terminationDate rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp::person
+<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp::person> rdf:type owl:Class ;
+                                                                                  rdfs:subClassOf <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp::person> ,
+                                                                                                  [ rdf:type owl:Restriction ;
+                                                                                                    owl:onProperty :hasrestriction ;
+                                                                                                    owl:someValuesFrom <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp::restriction>
+                                                                                                  ] ,
+                                                                                                  [ rdf:type owl:Restriction ;
+                                                                                                    owl:onProperty :idp:key ;
+                                                                                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                                    owl:onDataRange xsd:int
+                                                                                                  ] ,
+                                                                                                  [ rdf:type owl:Restriction ;
+                                                                                                    owl:onProperty :idp:nome ;
+                                                                                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                                    owl:onDataRange xsd:string
+                                                                                                  ] .
+
+
+###  http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp::restriction
+<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp::restriction> rdf:type owl:Class ;
+                                                                                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                                                                         owl:onProperty :job ;
+                                                                                                         owl:someValuesFrom xsd:string
+                                                                                                       ] ,
+                                                                                                       [ rdf:type owl:Restriction ;
+                                                                                                         owl:onProperty :idp:walkable ;
+                                                                                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                                         owl:onDataRange xsd:boolean
+                                                                                                       ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#IndoorCore:SpaceLayerType
+:IndoorCore:SpaceLayerType rdf:type owl:Class ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty :edges ;
+                                             owl:someValuesFrom :indoorcore:EdgesType
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty :function ;
+                                             owl:someValuesFrom :gml:CodeType
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty :usage ;
+                                             owl:someValuesFrom :gml:CodeType
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty :nodes ;
+                                             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                             owl:onClass :IndoorCore:nodesType
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty :class ;
+                                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                             owl:onClass :indoorcore:SpaceLayerClassTypeType
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty :indoorcore:creationDate ;
+                                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                             owl:onDataRange xsd:dateTime
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty :indoorcore:terminationDate ;
+                                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                             owl:onDataRange xsd:dateTime
+                                           ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#IndoorCore:TransitionType
+:IndoorCore:TransitionType rdf:type owl:Class ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty :idp:IsLocatedAt ;
+                                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                             owl:onClass :idp:Coordinates
+                                           ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#IndoorCore:nodesType
+:IndoorCore:nodesType rdf:type owl:Class .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#IndoorNavi:RouteSegmentType
+:IndoorNavi:RouteSegmentType rdf:type owl:Class ;
+                             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                               owl:onProperty :geometry ;
+                                               owl:someValuesFrom :geometryBasic2d:AbstractCurveType
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty :referencedTransition ;
+                                               owl:someValuesFrom :IndoorCore:TransitionType
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty :connects ;
+                                               owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                               owl:onClass :indoorgml:RouteNodeType
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty :weight ;
+                                               owl:someValuesFrom xsd:double
+                                             ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#geometryBasic2d:AbstractCurveType
+:geometryBasic2d:AbstractCurveType rdf:type owl:Class .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#gml:AbstractFeatureMemberType
+:gml:AbstractFeatureMemberType rdf:type owl:Class .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#gml:AssociationAttributeGroup
+:gml:AssociationAttributeGroup rdf:type owl:Class .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#gml:CodeType
+:gml:CodeType rdf:type owl:Class .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#gml:PointPropertyType
+:gml:PointPropertyType rdf:type owl:Class ;
+                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty :uri ;
+                                         owl:someValuesFrom xsd:anyURI
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :name ;
+                                         owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onDataRange xsd:string
+                                       ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#gml:SolidPropertyType
+:gml:SolidPropertyType rdf:type owl:Class .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#gml:SurfacePropertyType
+:gml:SurfacePropertyType rdf:type owl:Class .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#gml:point
+:gml:point rdf:type owl:Class ;
+           rdfs:subClassOf :gml:PointPropertyType ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :gml:posX ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange owl:rational
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :gml:posY ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange owl:rational
+                           ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:Coordinates
+:idp:Coordinates rdf:type owl:Class ;
+                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty :idp:coordenadaX ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onDataRange xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :idp:coordenadaY ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onDataRange xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :idp:coordenadaZ ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onDataRange xsd:string
+                                 ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:RouteNodeType
+:idp:RouteNodeType rdf:type owl:Class ;
+                   rdfs:subClassOf :indoorgml:RouteNodeType ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :externalObject ;
+                                     owl:someValuesFrom :indoorcore:ExternalReferenceType
+                                   ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:compoundCoordinates
+:idp:compoundCoordinates rdf:type owl:Class ;
+                         rdfs:subClassOf :gml:point ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :idp:coordenadaXFim ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onDataRange owl:rational
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :idp:coordenadaXInicio ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onDataRange owl:rational
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :idp:coordenadaYFim ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onDataRange owl:rational
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :idp:coordenadaYinicio ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onDataRange owl:rational
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :idp:coordenadaZFim ;
+                                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onDataRange owl:rational
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :idp:coordenadaZInicio ;
+                                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onDataRange owl:rational
+                                         ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:door
+:idp:door rdf:type owl:Class ;
+          rdfs:subClassOf :indoorNavi:TransferSpaceType ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :idp:IsLocatedAt ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :idp:Coordinates
+                          ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:obstacle
+:idp:obstacle rdf:type owl:Class ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty :hasrestriction ;
+                                owl:someValuesFrom <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp::restriction>
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :idp:IsLocatedAt ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onClass :idp:Coordinates
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :idp:obstacleSize ;
+                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                owl:onDataRange xsd:string
+                              ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#idp:stair
+:idp:stair rdf:type owl:Class ;
+           rdfs:subClassOf :indoorNavi:TransferSpaceType .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#iindoorcore:CellSpaceBoundaryPropertyType
+:iindoorcore:CellSpaceBoundaryPropertyType rdf:type owl:Class .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorNavi:NavigableBoundaryType
+:indoorNavi:NavigableBoundaryType rdf:type owl:Class .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorNavi:TransferSpaceType
+:indoorNavi:TransferSpaceType rdf:type owl:Class .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:CellSpaceGeometryType
+:indoorcore:CellSpaceGeometryType rdf:type owl:Class ;
+                                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :Geometry2D ;
+                                                    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass :gml:SurfacePropertyType
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :Geometry3D ;
+                                                    owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass :gml:SolidPropertyType
+                                                  ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:CellSpaceType
+:indoorcore:CellSpaceType rdf:type owl:Class ;
+                          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                            owl:onProperty :externalReference ;
+                                            owl:someValuesFrom :indoorcore:ExternalReferenceType
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :partialboundedBy ;
+                                            owl:someValuesFrom :iindoorcore:CellSpaceBoundaryPropertyType
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :cellSpaceGeometry ;
+                                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :indoorcore:CellSpaceGeometryType
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :duality ;
+                                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :indoorcore:StatePropertyType
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :level ;
+                                            owl:someValuesFrom xsd:string
+                                          ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:EdgesType
+:indoorcore:EdgesType rdf:type owl:Class .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:ExternalReferenceType
+:indoorcore:ExternalReferenceType rdf:type owl:Class ;
+                                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :externalObject ;
+                                                    owl:someValuesFrom :indoorcore:externalObjectReferenceType
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :informationSystem ;
+                                                    owl:someValuesFrom xsd:anyURI
+                                                  ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:InterEdgesType
+:indoorcore:InterEdgesType rdf:type owl:Class ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty :interLayerConnectionMember ;
+                                             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                             owl:onClass :indoorcore:InterLayerConnectionMemberType
+                                           ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:InterLayerConnectionMemberType
+:indoorcore:InterLayerConnectionMemberType rdf:type owl:Class ;
+                                           rdfs:subClassOf :gml:AbstractFeatureMemberType ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :AssociationAttributeGroup ;
+                                                             owl:someValuesFrom :gml:AssociationAttributeGroup
+                                                           ] ;
+                                           rdfs:comment "Denotin the interspace connections between the SpaceLayer" .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:MultiLayeredGraphType
+:indoorcore:MultiLayeredGraphType rdf:type owl:Class ;
+                                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :interEdges ;
+                                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass :indoorcore:InterEdgesType
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :spacelayers ;
+                                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass :IndoorCore:SpaceLayerType
+                                                  ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:SpaceLayerClassTypeType
+:indoorcore:SpaceLayerClassTypeType rdf:type owl:Class ;
+                                    rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :indoorcore:simpletype ;
+                                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                      owl:onDataRange xsd:string
+                                                    ] ;
+                                    rdfs:comment """it needs to be: 
+<xs:enumeration value=\"TOPOGRAPHIC\"/>
+<xs:enumeration value=\"SENSOR\"/>
+<xs:enumeration value=\"LOGICAL\"/>
+<xs:enumeration value=\"TAGS\"/>
+<xs:enumeration value=\"UNKNOWN\"/>""" .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:StatePropertyType
+:indoorcore:StatePropertyType rdf:type owl:Class ;
+                              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                owl:onProperty :StateType ;
+                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass :indoorcore:StateType
+                                              ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:StateType
+:indoorcore:StateType rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty :connects ;
+                                        owl:someValuesFrom :IndoorCore:TransitionType
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :duality ;
+                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass :indoorcore:CellSpaceType
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :point ;
+                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass :gml:point
+                                      ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorcore:externalObjectReferenceType
+:indoorcore:externalObjectReferenceType rdf:type owl:Class ;
+                                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :name ;
+                                                          owl:someValuesFrom xsd:string
+                                                        ] ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :uri ;
+                                                          owl:someValuesFrom xsd:anyURI
+                                                        ] ;
+                                        rdfs:comment "Em indoorplaning, use o link para idp::coordinates" .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoorgml:RouteNodeType
+:indoorgml:RouteNodeType rdf:type owl:Class ;
+                         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                           owl:onProperty :geometry ;
+                                           owl:someValuesFrom :gml:PointPropertyType
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :referencedState ;
+                                           owl:someValuesFrom :indoorcore:StatePropertyType
+                                         ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoornavi:RouteNodeMemberType
+:indoornavi:RouteNodeMemberType rdf:type owl:Class ;
+                                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                  owl:onProperty :RouteNode ;
+                                                  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                  owl:onClass :indoornavi:RouteNodeType
+                                                ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoornavi:RouteNodeType
+:indoornavi:RouteNodeType rdf:type owl:Class ;
+                          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                            owl:onProperty :StateType ;
+                                            owl:someValuesFrom :indoorcore:StatePropertyType
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :point ;
+                                            owl:someValuesFrom :gml:point
+                                          ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoornavi:RouteNodesType
+:indoornavi:RouteNodesType rdf:type owl:Class ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty :nodemember ;
+                                             owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                             owl:onClass :indoornavi:RouteNodeMemberType
+                                           ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoornavi:RouteType
+:indoornavi:RouteType rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty :endRouteNode ;
+                                        owl:someValuesFrom :indoornavi:RouteNodesType
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :path ;
+                                        owl:someValuesFrom :indoornavi:path
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :routeNodes ;
+                                        owl:someValuesFrom :indoorgml:RouteNodeType
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :startRouteNode ;
+                                        owl:someValuesFrom :indoornavi:RouteNodesType
+                                      ] .
+
+
+###  https://blindop.herokuapp.com/indoorplaning#indoornavi:path
+:indoornavi:path rdf:type owl:Class ;
+                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty :routemember ;
+                                   owl:someValuesFrom :IndoorNavi:RouteSegmentType
+                                 ] .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://blindop.herokuapp.com/indoorplaning#mapaEach
+:mapaEach rdf:type owl:NamedIndividual ,
+                   :indoorcore:externalObjectReferenceType ;
+          :name "Paredes" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
