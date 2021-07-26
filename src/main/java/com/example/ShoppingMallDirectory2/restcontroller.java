@@ -343,16 +343,39 @@ public class restcontroller {
 		//Pra fazer
 		@GetMapping("/ListarProdutosPorLoja")
 		public Produto[] ListaProdutosPorLoja(@RequestParam(value = "nomeLoja", defaultValue = "v1") String nomeLoja) {
-			Produto[] resp=new Produto[1];
+			
 			
 			String[][] te=this.genericSearch1("?A", "<"+urlbase+"#isSoldAt>", "<"+urlbase+"#"+nomeLoja+">");
-			Produto p=new Produto();
-			p.setHasCode(nomeLoja);
-			p.setHasProdName(nomeLoja);
-			p.setHasQuantity(nomeLoja);
-			p.setPrice(nomeLoja);
-			p.setStoreName(nomeLoja);
+			System.out.println(te.length+"\n\n"+te[0][0]+"\n \n"+te[0][1]);
+			Produto[] resp=new Produto[te.length];
+			for(int i=0;i<te.length;i++) {
+			String[][] prod=this.genericSearch2("<"+te[i][0]+">", "?A", "?B");
+				for(int j=0;j<prod.length;j++){
+					Produto p=new Produto();
+						if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#price")){
+							p.setPrice(this.CleanXSD(prod[j][1]));
+						}
+						if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#hasQuantity")){
+							p.setHasQuantity(this.CleanXSD(prod[j][1]));
+						}
+						if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#hasProdName")){
+							p.setHasProdName(this.CleanXSD(prod[j][1]));
+						}
+						if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#hasCode")){
+							p.setHasCode(this.CleanXSD(prod[j][1]));
+						}
+						if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#isSoldAt")){
+							p.setStoreName(nomeLoja);
+						}
+						else {
+						System.out.print(prod[j][0]);
+						}
+					System.out.print("\n");
+					resp[i]=p;
+				}
 			
+			
+			}
 			return resp;
 			
 		}
