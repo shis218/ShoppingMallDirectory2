@@ -298,9 +298,45 @@ public class restcontroller {
 		}
 		
 		
-		@GetMapping("/listaLojas")
-		public void a() {
+		@GetMapping("/listarLojas")
+		public nomeLojas[] listarLojas() {
 			
+			String[][] res=this.genericSearch1("<"+urlbase+"#ShoppingTL>","<"+urlbase+"#hosts>", "?A");
+			nomeLojas[] b=new nomeLojas[res.length];
+			for(int i=0;i<res.length;i++) {
+				nomeLojas gen=new nomeLojas();
+				gen.setNome(res[i][0]);
+				b[i]=gen;
+			}
+			return b;
+		}
+		
+		
+		
+		@GetMapping("/listarLojasPorAtividade")
+		public nomeLojas[] listarLojasAtv(@RequestParam(value = "atividade", defaultValue = "Atividade") String atividade) {
+			//Busca todas lojas que tem o tema
+			String[][] res=this.genericSearch1("<"+urlbase+"#"+atividade+">", "<"+urlbase+"#isThemeOf>", "?A");
+			nomeLojas[] b=new nomeLojas[res.length];
+			for(int i=0;i<res.length;i++) {
+				nomeLojas gen=new nomeLojas();
+				gen.setNome(res[i][0]);
+				b[i]=gen;
+			}
+			return b;
+		}
+		
+		@GetMapping("/listarAtividades")
+		public nomeLojas[] listarAtividades() {
+			
+			String[][] res=this.genericSearch1("<"+urlbase+"#ShoppingTL>","<"+urlbase+"#hosts>", "?A");
+			nomeLojas[] b=new nomeLojas[res.length];
+			for(int i=0;i<res.length;i++) {
+				nomeLojas gen=new nomeLojas();
+				gen.setNome(res[i][0]);
+				b[i]=gen;
+			}
+			return b;
 		}
 		
 		
