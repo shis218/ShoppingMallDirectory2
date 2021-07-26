@@ -27,6 +27,26 @@
 #    Object Properties
 #################################################################
 
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#cellSpaceBoundaryGeometry
+:cellSpaceBoundaryGeometry rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#connects
+:connects rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#duality
+:duality rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#externalReference
+:externalReference rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#geometry
+:geometry rdf:type owl:ObjectProperty .
+
+
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#hasActivity
 :hasActivity rdf:type owl:ObjectProperty ;
              owl:inverseOf :isThemeOf .
@@ -63,6 +83,22 @@
         rdfs:subPropertyOf owl:topObjectProperty .
 
 
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#partialboundedBy
+:partialboundedBy rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#point
+:point rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#referencedState
+:referencedState rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#referencedTransition
+:referencedTransition rdf:type owl:ObjectProperty .
+
+
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#sells
 :sells rdf:type owl:ObjectProperty .
 
@@ -70,6 +106,10 @@
 #################################################################
 #    Data properties
 #################################################################
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#SiteLoja
+:SiteLoja rdf:type owl:DatatypeProperty .
+
 
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#hasCode
 :hasCode rdf:type owl:DatatypeProperty .
@@ -87,12 +127,28 @@
 :hasQuantity rdf:type owl:DatatypeProperty .
 
 
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#level
+:level rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#name
+:name rdf:type owl:DatatypeProperty .
+
+
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#price
 :price rdf:type owl:DatatypeProperty .
 
 
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#uri
+:uri rdf:type owl:DatatypeProperty .
+
+
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#wasDiscounted
 :wasDiscounted rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#weight
+:weight rdf:type owl:DatatypeProperty .
 
 
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#gml:posX
@@ -236,17 +292,51 @@
                          owl:onClass :Mall
                        ] ,
                        [ rdf:type owl:Restriction ;
+                         owl:onProperty :SiteLoja ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onDataRange xsd:anyURI
+                       ] ,
+                       [ rdf:type owl:Restriction ;
                          owl:onProperty <http://xmlns.com/foaf/0.1/name> ;
                          owl:cardinality "1"^^xsd:nonNegativeInteger
                        ] .
 
 
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#IndoorNavi:RouteSegmentType
-:IndoorNavi:RouteSegmentType rdf:type owl:Class .
+:IndoorNavi:RouteSegmentType rdf:type owl:Class ;
+                             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                               owl:onProperty :geometry ;
+                                               owl:someValuesFrom :indoorcore:externalObjectReferenceType
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty :referencedTransition ;
+                                               owl:someValuesFrom :indoorcore:externalObjectReferenceType
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty :connects ;
+                                               owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                               owl:onClass :indoornavi:RouteNodeType
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty :weight ;
+                                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                               owl:onDataRange xsd:double
+                                             ] ;
+                             rdfs:comment "Serve para salvar os pesos entre caminhos" .
 
 
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#gml:PointPropertyType
-:gml:PointPropertyType rdf:type owl:Class .
+:gml:PointPropertyType rdf:type owl:Class ;
+                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty :name ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onDataRange xsd:string
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :uri ;
+                                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onDataRange xsd:anyURI
+                                       ] .
 
 
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#gml:point
@@ -269,36 +359,108 @@
                            ] .
 
 
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoorCore:TransitionType
+:indoorCore:TransitionType rdf:type owl:Class ;
+                           rdfs:comment "Não tratada nesta Shopping mall Directory" .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoorcore:CellSpaceBoundaryType
+:indoorcore:CellSpaceBoundaryType rdf:type owl:Class ;
+                                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :cellSpaceBoundaryGeometry ;
+                                                    owl:someValuesFrom :indoorcore:cellSpaceGeometry
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :duality ;
+                                                    owl:someValuesFrom :indoorcore:externalObjectReferenceType
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :externalReference ;
+                                                    owl:someValuesFrom :indoorcore:externalObjectReferenceType
+                                                  ] ;
+                                  rdfs:comment "adicione N referencias relatadas as boundarys desta celula" .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoorcore:CellSpaceType
+:indoorcore:CellSpaceType rdf:type owl:Class ;
+                          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                            owl:onProperty :externalReference ;
+                                            owl:someValuesFrom :indoorcore:externalObjectReferenceType
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :partialboundedBy ;
+                                            owl:someValuesFrom :indoorcore:CellSpaceBoundaryType
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :cellSpaceBoundaryGeometry ;
+                                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :indoorcore:cellSpaceGeometry
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :duality ;
+                                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :indoorcore:StateType
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :level ;
+                                            owl:someValuesFrom xsd:string
+                                          ] ;
+                          rdfs:comment "Essas celulas serão os pontos de interesse do programa, definidos principalmetne como \"lugares\"" .
+
+
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoorcore:StateType
-:indoorcore:StateType rdf:type owl:Class .
+:indoorcore:StateType rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty :connects ;
+                                        owl:someValuesFrom :indoorCore:TransitionType
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :duality ;
+                                        owl:someValuesFrom :indoorcore:CellSpaceType
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :point ;
+                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass :gml:point
+                                      ] .
+
+
+###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoorcore:cellSpaceGeometry
+:indoorcore:cellSpaceGeometry rdf:type owl:Class ;
+                              rdfs:comment "Não utilizada, refere ao formato do lugar utilizando Geometry 2d ou 3d do GML" .
 
 
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoorcore:externalObjectReferenceType
-:indoorcore:externalObjectReferenceType rdf:type owl:Class .
-
-
-###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoorgml:RouteNodeType
-:indoorgml:RouteNodeType rdf:type owl:Class .
-
-
-###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoornavi:RouteNodeMemberType
-:indoornavi:RouteNodeMemberType rdf:type owl:Class .
+:indoorcore:externalObjectReferenceType rdf:type owl:Class ;
+                                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :name ;
+                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                          owl:onDataRange xsd:string
+                                                        ] ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :uri ;
+                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                          owl:onDataRange xsd:anyURI
+                                                        ] .
 
 
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoornavi:RouteNodeType
-:indoornavi:RouteNodeType rdf:type owl:Class .
-
-
-###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoornavi:RouteNodesType
-:indoornavi:RouteNodesType rdf:type owl:Class .
+:indoornavi:RouteNodeType rdf:type owl:Class ;
+                          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                            owl:onProperty :geometry ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :gml:point
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :referencedState ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass :indoorcore:StateType
+                                          ] .
 
 
 ###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoornavi:RouteType
-:indoornavi:RouteType rdf:type owl:Class .
-
-
-###  http://www.semanticweb.org/heywt/ontologies/2021/4/ShoppingMallDirectory#indoornavi:path
-:indoornavi:path rdf:type owl:Class .
+:indoornavi:RouteType rdf:type owl:Class ;
+                      rdfs:comment "Não utilizada[salvador de rotas]" .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
