@@ -45,7 +45,7 @@ public class restcontroller {
 		
 		
 		@GetMapping("/rota")
-		public Rota[] rota(@RequestParam(value = "lugar", defaultValue = "mapaEach") String mapa,@RequestParam(value = "inicio", defaultValue = "portao1") String init,@RequestParam(value = "fim", defaultValue = "sala211") String end) {
+		public Rota[] rota(@RequestParam(value = "lugar", defaultValue = "mapaEach") String mapa,@RequestParam(value = "inicio", defaultValue = "Entrada") String init,@RequestParam(value = "fim", defaultValue = "cob") String end) {
 			
 			Rota[] rts=new Rota[10];
 			Rota[] rtm=getrota(mapa);
@@ -165,7 +165,7 @@ public class restcontroller {
 		
 
 		@GetMapping("/AdicionaLoja")
-		public String addLoja(@RequestParam(value = "lugar", defaultValue = "ShoppingTL") String nomemapa,@RequestParam(value = "nomeLoja", defaultValue = "Parede0") String nomeLoja, @RequestParam(value = "atividade", defaultValue = "Atividade") String atividade, @RequestParam(value = "posX1", defaultValue = "0") String posX1,  @RequestParam(value = "posX2", defaultValue = "0") String posX2,  @RequestParam(value = "posX3", defaultValue = "0") String posX3,  @RequestParam(value = "posX4", defaultValue = "0") String posX4,  @RequestParam(value = "posY1", defaultValue = "0") String posY1,  @RequestParam(value = "posY2", defaultValue = "0") String posY2,  @RequestParam(value = "posY3", defaultValue = "0") String posY3,  @RequestParam(value = "posY4", defaultValue = "0") String posY4) {
+		public String addLoja(@RequestParam(value = "lugar", defaultValue = "ShoppingTL") String nomemapa,@RequestParam(value = "nomeLoja", defaultValue = "Parede0") String nomeLoja, @RequestParam(value = "atividade", defaultValue = "Atividade") String atividade, @RequestParam(value = "posX1", defaultValue = "0") String posX1,  @RequestParam(value = "posX2", defaultValue = "0") String posX2,  @RequestParam(value = "posX3", defaultValue = "0") String posX3,  @RequestParam(value = "posX4", defaultValue = "0") String posX4,  @RequestParam(value = "posY1", defaultValue = "0") String posY1,  @RequestParam(value = "posY2", defaultValue = "0") String posY2,  @RequestParam(value = "posY3", defaultValue = "0") String posY3,  @RequestParam(value = "posY4", defaultValue = "0") String posY4,  @RequestParam(value = "posZ", defaultValue = "0") String posZ,@RequestParam(value = "siteLoja", defaultValue = "0") String siteLoja) {
 			StringBuilder sb=new StringBuilder();
 			//int[][][] intmap=getMapa(nomemapa);
 			
@@ -185,6 +185,7 @@ public class restcontroller {
 					+ "PosY3:<input name='posY3' id='posY3' value='"+posY3+"'><br>"
 					+ "PosX4:<input name='posX4' id='posX4' value='"+posX4+"'>"
 					+ "PosY4:<input name='posY4' id='posY4' value='"+posY4+"'><br>"
+					+ "PosZ:<input name='posZ' id='posZ' value='"+posZ+"'><br>"
 					+ "<button>ProximaLinha</button><br>"
 					+ "</form>"
 					+ "</body>\r\n"
@@ -192,7 +193,90 @@ public class restcontroller {
 					+ "\r\n"
 					+ "");
 			if(!nomeLoja.equals("Parede0")){
-			//Insere coordenadas
+			//Insere coordenadas em gml point
+				
+			String coordenadas1="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+					+"INSERT DATA{	\r\n"
+			+"<"+urlbase+"#quadrado"+nomeLoja+"1> <"+urlbase+"#gml:PosX> "+posX1+";"
+			+"<"+urlbase+"#gml:PosY> "+posY1+";"
+			+"<"+urlbase+"#gml:PosZ> "+posZ+".";
+			String coordenadas2="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+					+"INSERT DATA{	\r\n"
+			+"<"+urlbase+"#quadrado"+nomeLoja+"2> <"+urlbase+"#gml:PosX> "+posX2+";"
+			+"<"+urlbase+"#gml:PosY> "+posY2+";"
+			+"<"+urlbase+"#gml:PosZ> "+posZ+".";
+			String coordenadas3="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+					+"INSERT DATA{	\r\n"
+			+"<"+urlbase+"#quadrado"+nomeLoja+"3> <"+urlbase+"#gml:PosX> "+posX3+";"
+			+"<"+urlbase+"#gml:PosY> "+posY3+";"
+			+"<"+urlbase+"#gml:PosZ> "+posZ+".";
+			String coordenadas4="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+					+"INSERT DATA{	\r\n"
+			+"<"+urlbase+"#quadrado"+nomeLoja+"4> <"+urlbase+"#gml:PosX> "+posX4+";"
+			+"<"+urlbase+"#gml:PosY> "+posY4+";"
+			+"<"+urlbase+"#gml:PosZ> "+posZ+".";
+			this.InsertGenerico(coordenadas1);
+			this.InsertGenerico(coordenadas2);
+			this.InsertGenerico(coordenadas3);
+			this.InsertGenerico(coordenadas4);
+			//Adiciona referencias externas
+			String AdicionaRefs="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+					+"INSERT DATA{	\r\n"
+			+"<"+urlbase+"#ref"+nomeLoja+"1> <"+urlbase+"#uri> <"+urlbase+"#quadrado"+nomeLoja+"1>;"
+			+"<"+urlbase+"#name> <"+urlbase+"#quadrado"+nomeLoja+"1> ."
+			+"<"+urlbase+"#ref"+nomeLoja+"2> <"+urlbase+"#uri> <"+urlbase+"#quadrado"+nomeLoja+"2>;"
+			+"<"+urlbase+"#name> <"+urlbase+"#quadrado"+nomeLoja+"2> ."
+			+"<"+urlbase+"#ref"+nomeLoja+"3> <"+urlbase+"#uri> <"+urlbase+"#quadrado"+nomeLoja+"3>;"
+			+"<"+urlbase+"#name> <"+urlbase+"#quadrado"+nomeLoja+"3> ."
+			+"<"+urlbase+"#ref"+nomeLoja+"4> <"+urlbase+"#uri> <"+urlbase+"#quadrado"+nomeLoja+"4>;"
+			+"<"+urlbase+"#name> <"+urlbase+"#quadrado"+nomeLoja+"4> .";
+			this.InsertGenerico(AdicionaRefs);
+			
+			
+			//Adiciona indoorcore:CellSpaceBoundaryType baseada nas Refs
+			String CSBTToRef="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+					+"INSERT DATA{	\r\n"
+					+"<"+urlbase+"#CSBT"+nomeLoja+"> <"+urlbase+"#externalReference> <"+urlbase+"#ref"+nomeLoja+"1>;"
+					+"<"+urlbase+"#externalReference> <"+urlbase+"#ref"+nomeLoja+"2>;"
+					+"<"+urlbase+"#externalReference> <"+urlbase+"#ref"+nomeLoja+"3>;"
+					+"<"+urlbase+"#externalReference> <"+urlbase+"#ref"+nomeLoja+"4>."
+					;
+			this.InsertGenerico(CSBTToRef);
+			
+			
+			//Adiciona CellSpace da loja [Ouve um erro na ontologia de adicionar N refs na CSBoundaryType ao inves de N PartialBounded
+			String CellSpace="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+					+"INSERT DATA{	\r\n"
+					+"<"+urlbase+"#CSP"+nomeLoja+"> <"+urlbase+"#partialboundedBy> <"+urlbase+"#CSBT"+nomeLoja+">;"
+					+"<"+urlbase+"#level> "+posZ+"."
+					;
+			this.InsertGenerico(CellSpace);
+			
+			//Adiciona Atividade
+			String ativi="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+					+"INSERT DATA{	\r\n"
+					+"<"+urlbase+"#"+atividade+"> <"+urlbase+"#isThemeOf> <"+urlbase+"#"+nomeLoja+">.";
+			this.InsertGenerico(ativi);
+			
+			//Insere Store
+			String lojaStore="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+					+"INSERT DATA{	\r\n"
+					+"<"+urlbase+"#"+nomeLoja+"> <"+urlbase+"#CellSpace> <"+urlbase+"#CSP"+nomeLoja+">;"
+					+"<"+urlbase+"#hasActivity> <"+urlbase+"#"+atividade+">;"
+					+"<"+urlbase+"#isLocatedOn> <"+urlbase+"#"+nomemapa+">;"
+					+"<"+urlbase+"#SiteLoja> "+siteLoja +";"
+					+"<"+urlbase+"#name> \""+nomeLoja+"\" ."
+					;
+			this.InsertGenerico(lojaStore);
+			
+			
+			//Insere no Mall
+			String Mall="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+					+"INSERT DATA{	\r\n"
+					+"<"+urlbase+"#"+nomemapa+"> <"+urlbase+"#hosts> <"+urlbase+"#"+nomeLoja+">.";
+			this.InsertGenerico(Mall);
+			
+			
 			/*String string="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+ "INSERT DATA{	\r\n"
 	                + "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomeParede+"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaXInicio> "+posXini+"; \r\n"
