@@ -165,7 +165,7 @@ public class restcontroller {
 		
 
 		@GetMapping("/AdicionaLoja")
-		public String addLoja(@RequestParam(value = "lugar", defaultValue = "ShoppingTL") String nomemapa,@RequestParam(value = "nomeLoja", defaultValue = "Parede0") String nomeLoja,  @RequestParam(value = "posX1", defaultValue = "0") String posX1,  @RequestParam(value = "posX2", defaultValue = "0") String posX2,  @RequestParam(value = "posX3", defaultValue = "0") String posX3,  @RequestParam(value = "posX4", defaultValue = "0") String posX4,  @RequestParam(value = "posY1", defaultValue = "0") String posY1,  @RequestParam(value = "posY2", defaultValue = "0") String posY2,  @RequestParam(value = "posY3", defaultValue = "0") String posY3,  @RequestParam(value = "posY4", defaultValue = "0") String posY4) {
+		public String addLoja(@RequestParam(value = "lugar", defaultValue = "ShoppingTL") String nomemapa,@RequestParam(value = "nomeLoja", defaultValue = "Parede0") String nomeLoja, @RequestParam(value = "atividade", defaultValue = "Atividade") String atividade, @RequestParam(value = "posX1", defaultValue = "0") String posX1,  @RequestParam(value = "posX2", defaultValue = "0") String posX2,  @RequestParam(value = "posX3", defaultValue = "0") String posX3,  @RequestParam(value = "posX4", defaultValue = "0") String posX4,  @RequestParam(value = "posY1", defaultValue = "0") String posY1,  @RequestParam(value = "posY2", defaultValue = "0") String posY2,  @RequestParam(value = "posY3", defaultValue = "0") String posY3,  @RequestParam(value = "posY4", defaultValue = "0") String posY4) {
 			StringBuilder sb=new StringBuilder();
 			//int[][][] intmap=getMapa(nomemapa);
 			
@@ -176,14 +176,15 @@ public class restcontroller {
 					+ "\r\n"
 					+ "<form>"   //Fazendo um form que leva a propria pagina
 					+ "Nome da Parede: <input name='nomeParede' id='nomeParede' value='"+nomeLoja+"'><br>"
-					+ "posXini:<input name='posX1' id='posX1' value='"+posX1+"'><br>"
-					+ "posXfim:<input name='posX2' id='posX2' value='"+posX2+"'><br>"
-					+ "posXini:<input name='posX3' id='posX3' value='"+posX3+"'><br>"
-					+ "posXfim:<input name='posX4' id='posX4' value='"+posX4+"'><br>"
-					+ "posYini:<input name='posY1' id='posY1' value='"+posY1+"'><br>"
-					+ "posYfim:<input name='posY2' id='posY2' value='"+posY2+"'><br>"
-					+ "posYini:<input name='posY3' id='posY3' value='"+posY3+"'><br>"
-					+ "posYfim:<input name='posY4' id='posY4' value='"+posY4+"'><br>"
+					+ "Atividade:<input name='atividade' id='atividade' value='"+atividade+"'>"
+					+ "PosX1:<input name='posX1' id='posX1' value='"+posX1+"'>"
+					+ "PosY1:<input name='posY1' id='posY1' value='"+posY1+"'><br>"
+					+ "PosX2:<input name='posX2' id='posX2' value='"+posX2+"'>"
+					+ "PosY2:<input name='posY2' id='posY2' value='"+posY2+"'><br>"
+					+ "PosX3:<input name='posX3' id='posX3' value='"+posX3+"'>"
+					+ "PosY3:<input name='posY3' id='posY3' value='"+posY3+"'><br>"
+					+ "PosX4:<input name='posX4' id='posX4' value='"+posX4+"'>"
+					+ "PosY4:<input name='posY4' id='posY4' value='"+posY4+"'><br>"
 					+ "<button>ProximaLinha</button><br>"
 					+ "</form>"
 					+ "</body>\r\n"
