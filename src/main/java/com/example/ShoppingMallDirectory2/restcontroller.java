@@ -289,24 +289,7 @@ public class restcontroller {
 			String Mall="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+"INSERT DATA{	\r\n"
 					+"<"+urlbase+"#"+nomemapa+"> <"+urlbase+"#hosts> <"+urlbase+"#"+nomeLoja+">. }";
-			this.InsertGenerico(Mall);
-			
-			
-			/*String string="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
-					+ "INSERT DATA{	\r\n"
-	                + "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomeParede+"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaXInicio> "+posXini+"; \r\n"
-	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaXFim> "+posXfim+";"
-	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaYinicio> "+posYini+";"
-	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaYFim> "+posYfim+"."	
-	                + "};";
-			this.InsertGenerico(string);
-			//Insere referencia no mapa 
-			String string2="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
-					+ "INSERT DATA{	\r\n"
-	                + "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomemapa+"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#uri> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomeParede+">. \r\n"
-	                + "};";
-			
-			this.InsertGenerico(string2);*/
+			this.InsertGenerico(Mall);	
 			}
 			
 			return sb.toString();
@@ -480,7 +463,7 @@ public class restcontroller {
 						
 			return sb.toString();
 		}
-		@GetMapping("/String")
+		/*@GetMapping("/String")
 		public String Vertices() throws InterruptedException {
 			StringBuilder sb=new StringBuilder();
 			sb.append(" "
@@ -494,34 +477,8 @@ public class restcontroller {
 					+ "");
 						
 			return sb.toString();
-		}
-		
-		@GetMapping("/EntopeMapa")
-		public String EntopeMapa(@RequestParam(value = "lugar", defaultValue = "mapaEach") String nomemapa,@RequestParam(value = "nomeParede", defaultValue = "Parede0") String nomeParede,  @RequestParam(value = "posXini", defaultValue = "0") String posXini,  @RequestParam(value = "posXfim", defaultValue = "0") String posXfim,  @RequestParam(value = "posYini", defaultValue = "0") String posYini,  @RequestParam(value = "posYfim", defaultValue = "0") String posYfim) {
-			StringBuilder sb=new StringBuilder();
-			//int[][][] intmap=getMapa(nomemapa);		
-			
-			//Insere coordenadas
-			String string="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
-					+ "INSERT DATA{	\r\n"
-	                + "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomeParede+"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaXInicio> "+posXini+"; \r\n"
-	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaXFim> "+posXfim+";"
-	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaYinicio> "+posYini+";"
-	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaYFim> "+posYfim+"."	
-	                + "};";
-			this.InsertGenerico(string);
-			//Insere referencia no mapa 
-			String string2="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
-					+ "INSERT DATA{	\r\n"
-	                + "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomemapa+"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#uri> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomeParede+">. \r\n"
-	                + "};";
-			
-			this.InsertGenerico(string2);
-			
-			
-			return sb.toString();
-		}
-		
+		}*/		
+	
 		
 		
 		@GetMapping("/criaPontosDeInteresse")
@@ -563,7 +520,7 @@ public class restcontroller {
 			
 			return sb.toString();
 		}
-		@GetMapping("/ConectaPontoDeInteresse")
+		/*@GetMapping("/ConectaPontoDeInteresse")
 		public String ConectaPontoDeInteresse(@RequestParam(value = "lugar", defaultValue = "mapaEach") String nomemapa,@RequestParam(value = "nomeInteresse", defaultValue = "CH0") String nomeInteresse,@RequestParam(value = "nomeConecta", defaultValue = "CH1") String nomeConecta,@RequestParam(value = "direcao", defaultValue = "norte") String direcao,@RequestParam(value = "distancia", defaultValue = "0") String distancia ) {
 			StringBuilder sb=new StringBuilder();
 			//int[][][] intmap=getMapa(nomemapa);
@@ -598,7 +555,7 @@ public class restcontroller {
 			
 			return sb.toString();
 		}
-		
+		*/
 		public void InsertGenerico(String string) {			
 			 RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination(urlbase+"/update");
 			 System.out.println(string);
