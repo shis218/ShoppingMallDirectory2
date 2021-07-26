@@ -165,7 +165,7 @@ public class restcontroller {
 		
 
 		@GetMapping("/AdicionaLoja")
-		public String addLoja(@RequestParam(value = "lugar", defaultValue = "mapaEach") String nomemapa,@RequestParam(value = "nomeParede", defaultValue = "Parede0") String nomeParede,  @RequestParam(value = "posXini", defaultValue = "0") String posXini,  @RequestParam(value = "posXfim", defaultValue = "0") String posXfim,  @RequestParam(value = "posYini", defaultValue = "0") String posYini,  @RequestParam(value = "posYfim", defaultValue = "0") String posYfim) {
+		public String addLoja(@RequestParam(value = "lugar", defaultValue = "ShoppingTL") String nomemapa,@RequestParam(value = "nomeLoja", defaultValue = "Parede0") String nomeLoja,  @RequestParam(value = "posX1", defaultValue = "0") String posX1,  @RequestParam(value = "posX2", defaultValue = "0") String posX2,  @RequestParam(value = "posX3", defaultValue = "0") String posX3,  @RequestParam(value = "posX4", defaultValue = "0") String posX4,  @RequestParam(value = "posY1", defaultValue = "0") String posY1,  @RequestParam(value = "posY2", defaultValue = "0") String posY2,  @RequestParam(value = "posY3", defaultValue = "0") String posY3,  @RequestParam(value = "posY4", defaultValue = "0") String posY4) {
 			StringBuilder sb=new StringBuilder();
 			//int[][][] intmap=getMapa(nomemapa);
 			
@@ -175,20 +175,24 @@ public class restcontroller {
 					+ "<body>\r\n"
 					+ "\r\n"
 					+ "<form>"   //Fazendo um form que leva a propria pagina
-					+ "Nome da Parede: <input name='nomeParede' id='nomeParede' value='"+nomeParede+"'><br>"
-					+ "posXini:<input name='posXini' id='posXini' value='"+posXini+"'><br>"
-					+ "posXfim:<input name='posXfim' id='posXfim' value='"+posXfim+"'><br>"
-					+ "posYini:<input name='posYini' id='posYini' value='"+posYini+"'><br>"
-					+ "posYfim:<input name='posYfim' id='posYfim' value='"+posYfim+"'><br>"
+					+ "Nome da Parede: <input name='nomeParede' id='nomeParede' value='"+nomeLoja+"'><br>"
+					+ "posXini:<input name='posX1' id='posX1' value='"+posX1+"'><br>"
+					+ "posXfim:<input name='posX2' id='posX2' value='"+posX2+"'><br>"
+					+ "posXini:<input name='posX3' id='posX3' value='"+posX3+"'><br>"
+					+ "posXfim:<input name='posX4' id='posX4' value='"+posX4+"'><br>"
+					+ "posYini:<input name='posY1' id='posY1' value='"+posY1+"'><br>"
+					+ "posYfim:<input name='posY2' id='posY2' value='"+posY2+"'><br>"
+					+ "posYini:<input name='posY3' id='posY3' value='"+posY3+"'><br>"
+					+ "posYfim:<input name='posY4' id='posY4' value='"+posY4+"'><br>"
 					+ "<button>ProximaLinha</button><br>"
 					+ "</form>"
 					+ "</body>\r\n"
 					+ "</html>\r\n"
 					+ "\r\n"
 					+ "");
-			if(!nomeParede.equals("Parede0")){
+			if(!nomeLoja.equals("Parede0")){
 			//Insere coordenadas
-			String string="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+			/*String string="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+ "INSERT DATA{	\r\n"
 	                + "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomeParede+"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaXInicio> "+posXini+"; \r\n"
 	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaXFim> "+posXfim+";"
@@ -202,7 +206,7 @@ public class restcontroller {
 	                + "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomemapa+"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#uri> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomeParede+">. \r\n"
 	                + "};";
 			
-			this.InsertGenerico(string2);
+			this.InsertGenerico(string2);*/
 			}
 			
 			return sb.toString();
