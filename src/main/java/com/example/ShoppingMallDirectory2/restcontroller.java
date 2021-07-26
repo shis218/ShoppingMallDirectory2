@@ -350,31 +350,34 @@ public class restcontroller {
 			Produto[] resp=new Produto[te.length];
 			for(int i=0;i<te.length;i++) {
 			String[][] prod=this.genericSearch2("<"+te[i][0]+">", "?A", "?B");
-				for(int j=0;j<prod.length;j++){
-					Produto p=new Produto();
+			Produto p=new Produto();	
+			for(int j=0;j<prod.length;j++){
+				
+					prod[j][0]=prod[j][0].replace("h","h");
+					prod[j][1]=prod[j][1].replace("h","h");
 						if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#price")){
-							p.setPrice(this.CleanXSD(prod[j][1]));
+							p.setPrice(this.CleanXSD(prod[j][1])+"");
+							System.out.print("\n\n"+this.CleanXSD(prod[j][1]));
 						}
-						if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#hasQuantity")){
-							p.setHasQuantity(this.CleanXSD(prod[j][1]));
+						else if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#hasQuantity")){
+							p.setHasQuantity(this.CleanXSD(prod[j][1])+"");
 						}
-						if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#hasProdName")){
-							p.setHasProdName(this.CleanXSD(prod[j][1]));
+						else if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#hasProdName")){
+							p.setHasProdName(this.CleanXSD(prod[j][1])+"");
 						}
-						if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#hasCode")){
-							p.setHasCode(this.CleanXSD(prod[j][1]));
+						else if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#hasCode")){
+							p.setHasCode(this.CleanXSD(prod[j][1])+"");
 						}
-						if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#isSoldAt")){
+						else if(prod[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#isSoldAt")){
 							p.setStoreName(nomeLoja);
 						}
 						else {
-						System.out.print(prod[j][0]);
+						System.out.print(prod[j][0]+ " -----"+prod[j][1]+"\n");
 						}
-					System.out.print("\n");
-					resp[i]=p;
+					
 				}
 			
-			
+			resp[i]=p;
 			}
 			return resp;
 			

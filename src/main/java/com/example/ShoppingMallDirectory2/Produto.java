@@ -1,11 +1,11 @@
 package com.example.ShoppingMallDirectory2;
 
 public class Produto {
-String hasCode;
-String hasProdName;
-String hasQuantity;
-String StoreName;
-String price;
+private String hasCode;
+private String hasProdName;
+private String hasQuantity;
+private String StoreName;
+private String price;
 
 public String getHasCode() {
 	return hasCode;
