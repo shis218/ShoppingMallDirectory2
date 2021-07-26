@@ -338,15 +338,22 @@ public class restcontroller {
 			}
 			return b;
 		}
-		//Pra fazer ou inserir manualmente
-		@GetMapping("/AddProduto")
-		public void addProduto() {
-			
-		}
+
 		
 		//Pra fazer
 		@GetMapping("/ListarProdutosPorLoja")
-		public void ListaProdutosPorLoja() {
+		public Produto[] ListaProdutosPorLoja(@RequestParam(value = "nomeLoja", defaultValue = "v1") String nomeLoja) {
+			Produto[] resp=new Produto[1];
+			
+			String[][] te=this.genericSearch1("?A", "<"+urlbase+"#isSoldAt>", "<"+urlbase+"#"+nomeLoja+">");
+			Produto p=new Produto();
+			p.setHasCode(nomeLoja);
+			p.setHasProdName(nomeLoja);
+			p.setHasQuantity(nomeLoja);
+			p.setPrice(nomeLoja);
+			p.setStoreName(nomeLoja);
+			
+			return resp;
 			
 		}
 		//Pra fazer
