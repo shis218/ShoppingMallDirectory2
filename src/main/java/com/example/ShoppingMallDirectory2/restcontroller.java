@@ -223,7 +223,7 @@ public class restcontroller {
 			String AdicionaRefs="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+"INSERT DATA{	\r\n"
 			+"<"+urlbase+"#ref"+nomeLoja+"1> <"+urlbase+"#uri> <"+urlbase+"#quadrado"+nomeLoja+"1>;"
-			+"<"+urlbase+"#na	me> <"+urlbase+"#quadrado"+nomeLoja+"1> ."
+			+"<"+urlbase+"#name> <"+urlbase+"#quadrado"+nomeLoja+"1> ."
 			+"<"+urlbase+"#ref"+nomeLoja+"2> <"+urlbase+"#uri> <"+urlbase+"#quadrado"+nomeLoja+"2>;"
 			+"<"+urlbase+"#name> <"+urlbase+"#quadrado"+nomeLoja+"2> ."
 			+"<"+urlbase+"#ref"+nomeLoja+"3> <"+urlbase+"#uri> <"+urlbase+"#quadrado"+nomeLoja+"3>;"
