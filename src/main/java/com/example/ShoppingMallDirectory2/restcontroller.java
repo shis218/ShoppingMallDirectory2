@@ -329,7 +329,7 @@ public class restcontroller {
 		@GetMapping("/listarAtividades")
 		public nomeLojas[] listarAtividades() {
 			
-			String[][] res=this.genericSearch1("<"+urlbase+"#ShoppingTL>","<"+urlbase+"#hosts>", "?A");
+			String[][] res=this.genericSearch1("?A", "<"+urlbase+"#isThemeOf>", "?C");
 			nomeLojas[] b=new nomeLojas[res.length];
 			for(int i=0;i<res.length;i++) {
 				nomeLojas gen=new nomeLojas();
@@ -338,8 +338,36 @@ public class restcontroller {
 			}
 			return b;
 		}
+		//Pra fazer
+		@GetMapping("/AddProduto")
+		public void addProduto() {
+			
+		}
 		
+		//Pra fazer
+		@GetMapping("/LisrtaProdutosPorLoja")
+		public void ListaProdutosPorLoja() {
+			
+		}
+		//Pra fazer
+		@GetMapping("/RemoveProduto")
+		public void RemoveProduto() {
+			
+		}
 		
+		//Pra fazer
+		@GetMapping("/CadastraVenda")
+		public void CadastraVenda() {
+			
+		}
+				
+		
+		//Pra fazer
+		@GetMapping("/vetMapa")
+		public void vetMapa() {
+					
+		}
+		//atualizar a rota de dij por lojas
 		
 		@GetMapping("/dij")
 		public String Dij(@RequestParam(value = "inicio", defaultValue = "v1") String vertIniName,@RequestParam(value = "fim", defaultValue = "v3") String vertFimName) throws InterruptedException {
