@@ -39,7 +39,7 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 
 @RestController
 public class restcontroller {
-
+		String urlbase="http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2";
 		private static final String template = "Hello, %s!";
 		private final AtomicLong counter = new AtomicLong();
 		
@@ -346,7 +346,7 @@ public class restcontroller {
 		}
 		
 		public void InsertGenerico(String string) {			
-			 RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning/update");
+			 RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination(urlbase+"/update");
 		        try(RDFConnectionFuseki conn = (RDFConnectionFuseki) builder.build()) {
 
 		        	/*String do insert
@@ -404,7 +404,7 @@ public class restcontroller {
 				            sb.append(uriCoord);
 				            sb.append(">"); //Adiciona abre e fecha
 				            uriCoord=sb.toString();
-				            nomeCoord=uriCoord.replace("<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#", "");
+				            nomeCoord=uriCoord.replace(urlbase+"#", "");
 				            nomeCoord=nomeCoord.replace(">","");
 				            System.out.println("Nome coord:"+nomeCoord);
 				            uriCoords[vi]=uriCoord+"";
@@ -424,7 +424,7 @@ public class restcontroller {
 				            String coordTypeRaw =resultsQuery[0][1];
 				            String value = resultsQuery[0][2];
 				            //Descibre de que tipo é
-				            String coordType=(coordTypeRaw+"").replace("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#","");
+				            String coordType=(coordTypeRaw+"").replace(urlbase+"#","");
 				            int cType=-1;
 				            if(coordType.equals("gml:posX")) {
 				            	cType=1; 
@@ -450,7 +450,7 @@ public class restcontroller {
 				             coordTypeRaw =resultsQuery[1][1];
 				             value = resultsQuery[1][2];
 				            //Descibre de que tipo é
-				            coordType=(coordTypeRaw+"").replace("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#","");
+				            coordType=(coordTypeRaw+"").replace(urlbase+"#","");
 				            cType=-1;
 				            if(coordType.equals("gml:posX")) {
 				            	cType=1; 
@@ -501,7 +501,7 @@ public class restcontroller {
             
             System.out.println("\n BareURL "+uri+"\n" );
             //Remove a uri do nome
-            uri=(uri+"").replace("<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#RST","");
+            uri=(uri+"").replace("<"+urlbase+"#RST","");
             uri=(uri+"").replace(">","");
             uri=(uri+"").replace(nomeConecta,"");
             System.out.println("\n Transformed URL "+sb.toString()+"\n" );
@@ -530,30 +530,7 @@ public class restcontroller {
 
 				return resp;
 			}
-		private void InsereNum(int rA)
-		{
-			 RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning/update");
-		        try(RDFConnectionFuseki conn = (RDFConnectionFuseki) builder.build()) {
-
-		        	//String do insert
-		        	String string="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
-		        					+ "INSERT DATA{	\r\n"
-		        	                + "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#Usuario"+rA+"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:key> "+rA+" \r\n"
-		        	                + "};";
-
-		            try{
-		                UpdateRequest updateDevice = UpdateFactory.create(string);
-		                conn.update(updateDevice);
-		            }catch(Exception e){
-		                System.out.println("Erro no insert");
-		            }
-
-		        }catch (Exception e) {
-		            System.out.println("Não foi possível instanciar conexão");
-		            e.printStackTrace();
-		            throw new RuntimeException();
-		        }
-		}
+		
 		
 		
 		/*PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -751,7 +728,7 @@ INSERT DATA{
 			System.out.print("\n\nGeneric Search tp is:"+string);
 			
 			 
-			RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning/sparql");
+			RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination(urlbase+"/sparql");
 			
 			ArrayList<String[]> resp = new ArrayList<String[]>();
 			try(RDFConnectionFuseki conn = (RDFConnectionFuseki) builder.build()) {
@@ -789,7 +766,7 @@ INSERT DATA{
 			System.out.print("\n\nGeneric Search tp is:"+string);
 			
 			 
-			RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning/sparql");
+			RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination(urlbase+"/sparql");
 			
 			ArrayList<String[]> resp = new ArrayList<String[]>();
 			
@@ -829,7 +806,7 @@ INSERT DATA{
 			System.out.print("\n\nGeneric Search tp is:"+string);
 			
 			 
-			RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning/sparql");
+			RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination(urlbase+"/sparql");
 			
 			ArrayList<String[]> resp = new ArrayList<String[]>();
 			String[][] moldResp=new String[2][3];
