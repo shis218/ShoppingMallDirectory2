@@ -165,7 +165,7 @@ public class restcontroller {
 		
 
 		@GetMapping("/AdicionaLoja")
-		public String addLoja(@RequestParam(value = "lugar", defaultValue = "ShoppingTL") String nomemapa,@RequestParam(value = "nomeLoja", defaultValue = "Parede0") String nomeLoja, @RequestParam(value = "atividade", defaultValue = "Atividade") String atividade, @RequestParam(value = "posX1", defaultValue = "0") String posX1,  @RequestParam(value = "posX2", defaultValue = "0") String posX2,  @RequestParam(value = "posX3", defaultValue = "0") String posX3,  @RequestParam(value = "posX4", defaultValue = "0") String posX4,  @RequestParam(value = "posY1", defaultValue = "0") String posY1,  @RequestParam(value = "posY2", defaultValue = "0") String posY2,  @RequestParam(value = "posY3", defaultValue = "0") String posY3,  @RequestParam(value = "posY4", defaultValue = "0") String posY4,  @RequestParam(value = "posZ", defaultValue = "0") String posZ,@RequestParam(value = "siteLoja", defaultValue = "0") String siteLoja) {
+		public String addLoja(@RequestParam(value = "lugar", defaultValue = "ShoppingTL") String nomemapa,@RequestParam(value = "nomeLoja", defaultValue = "Parede0") String nomeLoja, @RequestParam(value = "atividade", defaultValue = "Atividade") String atividade, @RequestParam(value = "posX1", defaultValue = "0") String posX1,  @RequestParam(value = "posX2", defaultValue = "0") String posX2,  @RequestParam(value = "posX3", defaultValue = "0") String posX3,  @RequestParam(value = "posX4", defaultValue = "0") String posX4,  @RequestParam(value = "posY1", defaultValue = "0") String posY1,  @RequestParam(value = "posY2", defaultValue = "0") String posY2,  @RequestParam(value = "posY3", defaultValue = "0") String posY3,  @RequestParam(value = "posY4", defaultValue = "0") String posY4,  @RequestParam(value = "posZ", defaultValue = "0") String posZ,@RequestParam(value = "siteLoja", defaultValue = "0") String siteLoja,@RequestParam(value = "Con11", defaultValue = "0") String Con11,@RequestParam(value = "Con12", defaultValue = "0") String Con12,@RequestParam(value = "Con21", defaultValue = "0") String Con21,@RequestParam(value = "Con22", defaultValue = "0") String Con22,@RequestParam(value = "Con31", defaultValue = "0") String Con31,@RequestParam(value = "Con32", defaultValue = "0") String Con32,@RequestParam(value = "Con41", defaultValue = "0") String Con41,@RequestParam(value = "Con42", defaultValue = "0") String Con42,@RequestParam(value = "Dist1", defaultValue = "0") String Dist1,@RequestParam(value = "Dist2", defaultValue = "0") String Dist2,@RequestParam(value = "Dist3", defaultValue = "0") String Dist3,@RequestParam(value = "Dist4", defaultValue = "0") String Dist4) {
 			StringBuilder sb=new StringBuilder();
 			//int[][][] intmap=getMapa(nomemapa);
 			
@@ -186,6 +186,19 @@ public class restcontroller {
 					+ "PosX4:<input name='posX4' id='posX4' value='"+posX4+"'>"
 					+ "PosY4:<input name='posY4' id='posY4' value='"+posY4+"'><br>"
 					+ "PosZ:<input name='posZ' id='posZ' value='"+posZ+"'><br>"
+					+ "Conecta: 1-2-3-4<br>"
+					+ "Con1.1:<input name='Con11' id='Con11' value='"+Con11+"'><br>"
+					+ "Con1.2:<input name='Con12' id='Con12' value='"+Con12+"'><br>"
+					+ "Dist1:<input name='Dist1' id='Dist1' value='"+Dist1+"'><br>"
+					+ "Con2.1:<input name='Con21' id='Con21' value='"+Con21+"'><br>"
+					+ "Con2.2:<input name='Con22' id='Con22' value='"+Con22+"'><br>"
+					+ "Dist2:<input name='Dist2' id='Dist2' value='"+Dist2+"'><br>"
+					+ "Con3.1:<input name='Con31' id='Con31' value='"+Con31+"'><br>"
+					+ "Con3.2:<input name='Con32' id='Con32' value='"+Con32+"'><br>"
+					+ "Dist3:<input name='Dist3' id='Dist3' value='"+Dist3+"'><br>"
+					+ "Con4.1:<input name='Con41' id='Con41' value='"+Con41+"'><br>"
+					+ "Con4.2:<input name='Con42' id='Con42' value='"+Con42+"'><br>"
+					+ "Dist4:<input name='Dist4' id='Dist4' value='"+Dist4+"'><br>"
 					+ "<button>ProximaLinha</button><br>"
 					+ "</form>"
 					+ "</body>\r\n"
@@ -219,6 +232,8 @@ public class restcontroller {
 			this.InsertGenerico(coordenadas2);
 			this.InsertGenerico(coordenadas3);
 			this.InsertGenerico(coordenadas4);
+			//Cria as conexões IndoorNavi:RouteSegmentType
+			
 			//Adiciona referencias externas
 			String AdicionaRefs="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+"INSERT DATA{	\r\n"
@@ -342,7 +357,7 @@ public class restcontroller {
 		
 		//Pra fazer
 		@GetMapping("/ListarProdutosPorLoja")
-		public Produto[] ListaProdutosPorLoja(@RequestParam(value = "nomeLoja", defaultValue = "v1") String nomeLoja) {
+		public Produto[] ListaProdutosPorLoja(@RequestParam(value = "nomeLoja", defaultValue = "lojas_americanas") String nomeLoja) {
 			
 			
 			String[][] te=this.genericSearch1("?A", "<"+urlbase+"#isSoldAt>", "<"+urlbase+"#"+nomeLoja+">");
@@ -853,10 +868,10 @@ INSERT DATA{
 		//	String uriParede="<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#Parede"+vi+">";
 			
 			String uriParede;
-			String string="SELECT ?C {<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomeMapa +"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#uri> ?C}";
+			String string="SELECT ?A ?B ?C {?A <"+urlbase+"#uri> ?C}";
 			Query query=QueryFactory.create(string);
 			
-			RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning/sparql");
+			RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination(urlbase+"/sparql");
 			
 		
 			try(RDFConnectionFuseki conn = (RDFConnectionFuseki) builder.build()) {
@@ -920,7 +935,7 @@ INSERT DATA{
 								            //Descibre de que tipo é
 								            String coordType=(coordTypeRaw+"").replace("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#","");
 								            int cType=-1;
-								            if(coordType.equals("idp:coordenadaXInicio")) {
+								            if(coordType.equals("gml:posX")) {
 								            	cType=0; 
 								            }
 								            if(coordType.equals("idp:coordenadaYinicio")) {
