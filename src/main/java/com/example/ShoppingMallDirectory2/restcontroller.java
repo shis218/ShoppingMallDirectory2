@@ -48,7 +48,7 @@ public class restcontroller {
 		public Rota[] rota(@RequestParam(value = "lugar", defaultValue = "mapaEach") String mapa,@RequestParam(value = "inicio", defaultValue = "Entrada") String init,@RequestParam(value = "fim", defaultValue = "cob") String end) {
 			
 			Rota[] rts=new Rota[10];
-			Rota[] rtm=getrota(mapa);
+			//Rota[] rtm=getrota(mapa);
 			for(int i=0;i<10;i++) {
 				Rota r=new Rota();
 				if(i%2==0) {
@@ -175,7 +175,7 @@ public class restcontroller {
 					+ "<body>\r\n"
 					+ "\r\n"
 					+ "<form>"   //Fazendo um form que leva a propria pagina
-					+ "Nome da Parede: <input name='nomeParede' id='nomeParede' value='"+nomeLoja+"'><br>"
+					+ "Nome da Parede: <input name='nomeLoja' id='nomeLoja' value='"+nomeLoja+"'><br>"
 					+ "Atividade:<input name='atividade' id='atividade' value='"+atividade+"'>"
 					+ "PosX1:<input name='posX1' id='posX1' value='"+posX1+"'>"
 					+ "PosY1:<input name='posY1' id='posY1' value='"+posY1+"'><br>"
