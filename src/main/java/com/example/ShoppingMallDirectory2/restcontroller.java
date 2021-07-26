@@ -130,7 +130,7 @@ public class restcontroller {
 					+ "<body>\r\n"
 					+ "\r\n"
 					+ "<form>"   //Fazendo um form que leva a propria pagina
-					+ "Nome da Parede: <input name='nomeParede' id='nomeParede' value='"+nomeParede+"'><br>"
+					+ "Nome da loja: <input name='nomeParede' id='nomeParede' value='"+nomeParede+"'><br>"
 					+ "posXini:<input name='posXini' id='posXini' value='"+posXini+"'><br>"
 					+ "posXfim:<input name='posXfim' id='posXfim' value='"+posXfim+"'><br>"
 					+ "posYini:<input name='posYini' id='posYini' value='"+posYini+"'><br>"
@@ -223,7 +223,7 @@ public class restcontroller {
 			String AdicionaRefs="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+"INSERT DATA{	\r\n"
 			+"<"+urlbase+"#ref"+nomeLoja+"1> <"+urlbase+"#uri> <"+urlbase+"#quadrado"+nomeLoja+"1>;"
-			+"<"+urlbase+"#name> <"+urlbase+"#quadrado"+nomeLoja+"1> ."
+			+"<"+urlbase+"#na	me> <"+urlbase+"#quadrado"+nomeLoja+"1> ."
 			+"<"+urlbase+"#ref"+nomeLoja+"2> <"+urlbase+"#uri> <"+urlbase+"#quadrado"+nomeLoja+"2>;"
 			+"<"+urlbase+"#name> <"+urlbase+"#quadrado"+nomeLoja+"2> ."
 			+"<"+urlbase+"#ref"+nomeLoja+"3> <"+urlbase+"#uri> <"+urlbase+"#quadrado"+nomeLoja+"3>;"
@@ -553,7 +553,9 @@ public class restcontroller {
 		
 		public void InsertGenerico(String string) {			
 			 RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination(urlbase+"/update");
-		        try(RDFConnectionFuseki conn = (RDFConnectionFuseki) builder.build()) {
+			 System.out.println(string);
+			 
+			 try(RDFConnectionFuseki conn = (RDFConnectionFuseki) builder.build()) {
 
 		        	/*String do insert
 		        	String string="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
