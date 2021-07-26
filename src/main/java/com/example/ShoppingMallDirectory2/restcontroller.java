@@ -199,22 +199,22 @@ public class restcontroller {
 					+"INSERT DATA{	\r\n"
 			+"<"+urlbase+"#quadrado"+nomeLoja+"1> <"+urlbase+"#gml:PosX> "+posX1+";"
 			+"<"+urlbase+"#gml:PosY> "+posY1+";"
-			+"<"+urlbase+"#gml:PosZ> "+posZ+".";
+			+"<"+urlbase+"#gml:PosZ> "+posZ+". }";
 			String coordenadas2="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+"INSERT DATA{	\r\n"
 			+"<"+urlbase+"#quadrado"+nomeLoja+"2> <"+urlbase+"#gml:PosX> "+posX2+";"
 			+"<"+urlbase+"#gml:PosY> "+posY2+";"
-			+"<"+urlbase+"#gml:PosZ> "+posZ+".";
+			+"<"+urlbase+"#gml:PosZ> "+posZ+". }";
 			String coordenadas3="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+"INSERT DATA{	\r\n"
 			+"<"+urlbase+"#quadrado"+nomeLoja+"3> <"+urlbase+"#gml:PosX> "+posX3+";"
 			+"<"+urlbase+"#gml:PosY> "+posY3+";"
-			+"<"+urlbase+"#gml:PosZ> "+posZ+".";
+			+"<"+urlbase+"#gml:PosZ> "+posZ+". }";
 			String coordenadas4="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+"INSERT DATA{	\r\n"
 			+"<"+urlbase+"#quadrado"+nomeLoja+"4> <"+urlbase+"#gml:PosX> "+posX4+";"
 			+"<"+urlbase+"#gml:PosY> "+posY4+";"
-			+"<"+urlbase+"#gml:PosZ> "+posZ+".";
+			+"<"+urlbase+"#gml:PosZ> "+posZ+". }";
 			this.InsertGenerico(coordenadas1);
 			this.InsertGenerico(coordenadas2);
 			this.InsertGenerico(coordenadas3);
@@ -229,7 +229,7 @@ public class restcontroller {
 			+"<"+urlbase+"#ref"+nomeLoja+"3> <"+urlbase+"#uri> <"+urlbase+"#quadrado"+nomeLoja+"3>;"
 			+"<"+urlbase+"#name> <"+urlbase+"#quadrado"+nomeLoja+"3> ."
 			+"<"+urlbase+"#ref"+nomeLoja+"4> <"+urlbase+"#uri> <"+urlbase+"#quadrado"+nomeLoja+"4>;"
-			+"<"+urlbase+"#name> <"+urlbase+"#quadrado"+nomeLoja+"4> .";
+			+"<"+urlbase+"#name> <"+urlbase+"#quadrado"+nomeLoja+"4> . }";
 			this.InsertGenerico(AdicionaRefs);
 			
 			
@@ -239,7 +239,7 @@ public class restcontroller {
 					+"<"+urlbase+"#CSBT"+nomeLoja+"> <"+urlbase+"#externalReference> <"+urlbase+"#ref"+nomeLoja+"1>;"
 					+"<"+urlbase+"#externalReference> <"+urlbase+"#ref"+nomeLoja+"2>;"
 					+"<"+urlbase+"#externalReference> <"+urlbase+"#ref"+nomeLoja+"3>;"
-					+"<"+urlbase+"#externalReference> <"+urlbase+"#ref"+nomeLoja+"4>."
+					+"<"+urlbase+"#externalReference> <"+urlbase+"#ref"+nomeLoja+"4>. }"
 					;
 			this.InsertGenerico(CSBTToRef);
 			
@@ -248,14 +248,14 @@ public class restcontroller {
 			String CellSpace="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+"INSERT DATA{	\r\n"
 					+"<"+urlbase+"#CSP"+nomeLoja+"> <"+urlbase+"#partialboundedBy> <"+urlbase+"#CSBT"+nomeLoja+">;"
-					+"<"+urlbase+"#level> "+posZ+"."
+					+"<"+urlbase+"#level> "+posZ+".  }"
 					;
 			this.InsertGenerico(CellSpace);
 			
 			//Adiciona Atividade
 			String ativi="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+"INSERT DATA{	\r\n"
-					+"<"+urlbase+"#"+atividade+"> <"+urlbase+"#isThemeOf> <"+urlbase+"#"+nomeLoja+">.";
+					+"<"+urlbase+"#"+atividade+"> <"+urlbase+"#isThemeOf> <"+urlbase+"#"+nomeLoja+">.  }";
 			this.InsertGenerico(ativi);
 			
 			//Insere Store
@@ -265,7 +265,7 @@ public class restcontroller {
 					+"<"+urlbase+"#hasActivity> <"+urlbase+"#"+atividade+">;"
 					+"<"+urlbase+"#isLocatedOn> <"+urlbase+"#"+nomemapa+">;"
 					+"<"+urlbase+"#SiteLoja> "+siteLoja +";"
-					+"<"+urlbase+"#name> \""+nomeLoja+"\" ."
+					+"<"+urlbase+"#name> \""+nomeLoja+"\" . }"
 					;
 			this.InsertGenerico(lojaStore);
 			
@@ -273,7 +273,7 @@ public class restcontroller {
 			//Insere no Mall
 			String Mall="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+"INSERT DATA{	\r\n"
-					+"<"+urlbase+"#"+nomemapa+"> <"+urlbase+"#hosts> <"+urlbase+"#"+nomeLoja+">.";
+					+"<"+urlbase+"#"+nomemapa+"> <"+urlbase+"#hosts> <"+urlbase+"#"+nomeLoja+">. }";
 			this.InsertGenerico(Mall);
 			
 			
