@@ -298,6 +298,12 @@ public class restcontroller {
 		}
 		
 		
+		@GetMapping("/listaLojas")
+		public void a() {
+			
+		}
+		
+		
 		
 		@GetMapping("/dij")
 		public String Dij(@RequestParam(value = "inicio", defaultValue = "v1") String vertIniName,@RequestParam(value = "fim", defaultValue = "v3") String vertFimName) throws InterruptedException {
