@@ -163,6 +163,53 @@ public class restcontroller {
 			return sb.toString();
 		}
 		
+
+		@GetMapping("/AdicionaLoja")
+		public String addLoja(@RequestParam(value = "lugar", defaultValue = "mapaEach") String nomemapa,@RequestParam(value = "nomeParede", defaultValue = "Parede0") String nomeParede,  @RequestParam(value = "posXini", defaultValue = "0") String posXini,  @RequestParam(value = "posXfim", defaultValue = "0") String posXfim,  @RequestParam(value = "posYini", defaultValue = "0") String posYini,  @RequestParam(value = "posYfim", defaultValue = "0") String posYfim) {
+			StringBuilder sb=new StringBuilder();
+			//int[][][] intmap=getMapa(nomemapa);
+			
+			
+			sb.append("<!DOCTYPE html>\r\n"
+					+ "<html>\r\n"
+					+ "<body>\r\n"
+					+ "\r\n"
+					+ "<form>"   //Fazendo um form que leva a propria pagina
+					+ "Nome da Parede: <input name='nomeParede' id='nomeParede' value='"+nomeParede+"'><br>"
+					+ "posXini:<input name='posXini' id='posXini' value='"+posXini+"'><br>"
+					+ "posXfim:<input name='posXfim' id='posXfim' value='"+posXfim+"'><br>"
+					+ "posYini:<input name='posYini' id='posYini' value='"+posYini+"'><br>"
+					+ "posYfim:<input name='posYfim' id='posYfim' value='"+posYfim+"'><br>"
+					+ "<button>ProximaLinha</button><br>"
+					+ "</form>"
+					+ "</body>\r\n"
+					+ "</html>\r\n"
+					+ "\r\n"
+					+ "");
+			if(!nomeParede.equals("Parede0")){
+			//Insere coordenadas
+			String string="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+					+ "INSERT DATA{	\r\n"
+	                + "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomeParede+"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaXInicio> "+posXini+"; \r\n"
+	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaXFim> "+posXfim+";"
+	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaYinicio> "+posYini+";"
+	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaYFim> "+posYfim+"."	
+	                + "};";
+			this.InsertGenerico(string);
+			//Insere referencia no mapa 
+			String string2="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
+					+ "INSERT DATA{	\r\n"
+	                + "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomemapa+"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#uri> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomeParede+">. \r\n"
+	                + "};";
+			
+			this.InsertGenerico(string2);
+			}
+			
+			return sb.toString();
+		}
+		
+		
+		
 		@GetMapping("/dij")
 		public String Dij(@RequestParam(value = "inicio", defaultValue = "v1") String vertIniName,@RequestParam(value = "fim", defaultValue = "v3") String vertFimName) throws InterruptedException {
 
