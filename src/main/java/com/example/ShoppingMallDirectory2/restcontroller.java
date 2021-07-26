@@ -338,7 +338,7 @@ public class restcontroller {
 			}
 			return b;
 		}
-		//Pra fazer
+		//Pra fazer ou inserir manualmente
 		@GetMapping("/AddProduto")
 		public void addProduto() {
 			
