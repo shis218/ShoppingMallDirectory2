@@ -345,7 +345,7 @@ public class restcontroller {
 		}
 		
 		//Pra fazer
-		@GetMapping("/LisrtaProdutosPorLoja")
+		@GetMapping("/ListarProdutosPorLoja")
 		public void ListaProdutosPorLoja() {
 			
 		}
