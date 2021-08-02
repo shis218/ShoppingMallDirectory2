@@ -1,6 +1,7 @@
 package com.example.ShoppingMallDirectory2;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -33,6 +34,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
 import ch.qos.logback.core.net.SyslogOutputStream;
 
 
@@ -44,29 +47,7 @@ public class restcontroller {
 		private final AtomicLong counter = new AtomicLong();
 		
 		
-		@GetMapping("/rota")
-		public Rota[] rota(@RequestParam(value = "lugar", defaultValue = "mapaEach") String mapa,@RequestParam(value = "inicio", defaultValue = "Entrada") String init,@RequestParam(value = "fim", defaultValue = "cob") String end) {
-			
-			Rota[] rts=new Rota[10];
-			//Rota[] rtm=getrota(mapa);
-			for(int i=0;i<10;i++) {
-				Rota r=new Rota();
-				if(i%2==0) {
-					r.setDirecao("Cima");
-					r.setMetros(2);
-					r.setNumeroSequencia(i);
-					r.setPassos(16);
-				}
-				else {
-					r.setDirecao("Direita");
-					r.setMetros(5);
-					r.setNumeroSequencia(i);
-					r.setPassos(4);
-				}
-				rts[i]=r;
-			}
-			return rts;
-		}
+	
 		@GetMapping("/mapa")
 		public String mapear(@RequestParam(value = "lugar", defaultValue = "mapaEach") String nomemapa) throws InterruptedException {
 			StringBuilder sb=new StringBuilder();
@@ -119,49 +100,7 @@ public class restcontroller {
 			return sb.toString();
 		}
 		
-		@GetMapping("/criamapa")
-		public String criamapa(@RequestParam(value = "lugar", defaultValue = "mapaEach") String nomemapa,@RequestParam(value = "nomeParede", defaultValue = "Parede0") String nomeParede,  @RequestParam(value = "posXini", defaultValue = "0") String posXini,  @RequestParam(value = "posXfim", defaultValue = "0") String posXfim,  @RequestParam(value = "posYini", defaultValue = "0") String posYini,  @RequestParam(value = "posYfim", defaultValue = "0") String posYfim) {
-			StringBuilder sb=new StringBuilder();
-			//int[][][] intmap=getMapa(nomemapa);
-			
-			
-			sb.append("<!DOCTYPE html>\r\n"
-					+ "<html>\r\n"
-					+ "<body>\r\n"
-					+ "\r\n"
-					+ "<form>"   //Fazendo um form que leva a propria pagina
-					+ "Nome da loja: <input name='nomeParede' id='nomeParede' value='"+nomeParede+"'><br>"
-					+ "posXini:<input name='posXini' id='posXini' value='"+posXini+"'><br>"
-					+ "posXfim:<input name='posXfim' id='posXfim' value='"+posXfim+"'><br>"
-					+ "posYini:<input name='posYini' id='posYini' value='"+posYini+"'><br>"
-					+ "posYfim:<input name='posYfim' id='posYfim' value='"+posYfim+"'><br>"
-					+ "<button>ProximaLinha</button><br>"
-					+ "</form>"
-					+ "</body>\r\n"
-					+ "</html>\r\n"
-					+ "\r\n"
-					+ "");
-			if(!nomeParede.equals("Parede0")){
-			//Insere coordenadas
-			String string="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
-					+ "INSERT DATA{	\r\n"
-	                + "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomeParede+"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaXInicio> "+posXini+"; \r\n"
-	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaXFim> "+posXfim+";"
-	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaYinicio> "+posYini+";"
-	                +"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:coordenadaYFim> "+posYfim+"."	
-	                + "};";
-			this.InsertGenerico(string);
-			//Insere referencia no mapa 
-			String string2="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
-					+ "INSERT DATA{	\r\n"
-	                + "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomemapa+"> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#uri> <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#"+nomeParede+">. \r\n"
-	                + "};";
-			
-			this.InsertGenerico(string2);
-			}
-			
-			return sb.toString();
-		}
+		
 		
 
 		@GetMapping("/AdicionaLoja")
@@ -187,7 +126,7 @@ public class restcontroller {
 					+ "PosY4:<input name='posY4' id='posY4' value='"+posY4+"'><br>"
 					+ "PosZ:<input name='posZ' id='posZ' value='"+posZ+"'><br>"
 					+ "Conecta: 1-2-3-4<br>"
-					+ "Con1.1:<input name='Con11' id='Con11' value='"+Con11+"'><br>"
+					/*+ "Con1.1:<input name='Con11' id='Con11' value='"+Con11+"'><br>"
 					+ "Con1.2:<input name='Con12' id='Con12' value='"+Con12+"'><br>"
 					+ "Dist1:<input name='Dist1' id='Dist1' value='"+Dist1+"'><br>"
 					+ "Con2.1:<input name='Con21' id='Con21' value='"+Con21+"'><br>"
@@ -198,7 +137,7 @@ public class restcontroller {
 					+ "Dist3:<input name='Dist3' id='Dist3' value='"+Dist3+"'><br>"
 					+ "Con4.1:<input name='Con41' id='Con41' value='"+Con41+"'><br>"
 					+ "Con4.2:<input name='Con42' id='Con42' value='"+Con42+"'><br>"
-					+ "Dist4:<input name='Dist4' id='Dist4' value='"+Dist4+"'><br>"
+					+ "Dist4:<input name='Dist4' id='Dist4' value='"+Dist4+"'><br>"*/
 					+ "<button>ProximaLinha</button><br>"
 					+ "</form>"
 					+ "</body>\r\n"
@@ -232,7 +171,7 @@ public class restcontroller {
 			this.InsertGenerico(coordenadas2);
 			this.InsertGenerico(coordenadas3);
 			this.InsertGenerico(coordenadas4);
-			//Cria as conexões IndoorNavi:RouteSegmentType
+			
 			
 			//Adiciona referencias externas
 			String AdicionaRefs="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
@@ -303,7 +242,7 @@ public class restcontroller {
 			nomeLojas[] b=new nomeLojas[res.length];
 			for(int i=0;i<res.length;i++) {
 				nomeLojas gen=new nomeLojas();
-				gen.setNome(res[i][0]);
+				gen.setNome(this.CleanRST(res[i][0],"naoremove"));
 				b[i]=gen;
 			}
 			return b;
@@ -318,7 +257,7 @@ public class restcontroller {
 			nomeLojas[] b=new nomeLojas[res.length];
 			for(int i=0;i<res.length;i++) {
 				nomeLojas gen=new nomeLojas();
-				gen.setNome(res[i][0]);
+				gen.setNome(this.CleanRST(res[i][0],"naoremove"));
 				b[i]=gen;
 			}
 			return b;
@@ -393,91 +332,115 @@ public class restcontroller {
 		}
 				
 		
-		//Pra fazer
-		@GetMapping("/vetMapa")
-		public void vetMapa() {
-					
-		}
+		
 		//atualizar a rota de dij por lojas
 		
+		@GetMapping("/rota")
+		public Rota[] rota(@RequestParam(value = "lugar", defaultValue = "mapaEach") String mapa,@RequestParam(value = "inicio", defaultValue = "Entrada") String vertIniName,@RequestParam(value = "fim", defaultValue = "Carrefour") String vertFimName) throws InterruptedException {
+			String txt=Dijkm(vertIniName,vertFimName);
+			
+			System.out.println(txt+"\n\n");
+		//	Rota[] rtm=getrota(mapa);
+			txt=txt.replace("[", "")	;
+			txt=txt.replace("]", "")	;
+			String[] pontos= txt.split(",");
+			//Tamanho é -1 pois na ultima posição já chegou no destino e não precisa andar mais
+			Rota[] rts=new Rota[pontos.length-1];
+			
+			for(int in=0;in<pontos.length-1;in++) {
+				Rota r=new Rota();
+				
+
+				String nome1=pontos[in].trim();
+				String nome2=pontos[in+1].trim();
+				r.setNumeroSequencia(in);
+				
+				String[][] rq2=this.genericSearch1("<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#RST"+nome1+""+nome2+">", "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#weight>", "?A");
+				if(rq2==null) {
+					rq2=this.genericSearch1("<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#RST"+nome2+""+nome1+">", "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#weight>", "?A");
+				}
+				rq2[0][0]=CleanXSD(rq2[0][0]);
+				r.setMetros(Float.parseFloat(rq2[0][0]));
+				r.setPassos((int)Float.parseFloat(rq2[0][0])/10);
+				String[][] rq3=this.genericSearch1("<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#RST"+nome1+""+nome2+">", "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#direct>", "?A");
+				if(rq3==null) {
+					rq3=this.genericSearch1("<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#RST"+nome2+""+nome1+">", "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#direct>", "?A");
+				}
+				rq3[0][0]=CleanXSD(rq3[0][0]);
+				r.setDirecao(CleanXSD(rq3[0][0]));
+				rts[in]=r;
+				}
+				
+			
+			return rts;
+		}
 		@GetMapping("/dij")
-		public String Dij(@RequestParam(value = "inicio", defaultValue = "v1") String vertIniName,@RequestParam(value = "fim", defaultValue = "v3") String vertFimName) throws InterruptedException {
+		public String Dijk(@RequestParam(value = "inicio", defaultValue = "Entrada") String vertIniName,@RequestParam(value = "fim", defaultValue = "Saida") String vertFimName) throws InterruptedException {
+
+		        String txt=Dijkm(vertIniName,vertFimName);
+		        StringBuilder sb=new StringBuilder();
+		        sb.append("<!DOCTYPE html>\r\n"
+						+ "<html>\r\n"
+						+ "<body>\r\n");
+		        sb.append(txt);        
+		        sb.append("</body>\r\n"
+					+ "</html>\r\n"
+					+ "\r\n"
+					+ "");
+						
+			return sb.toString();
+		}
+		
+		public String Dijkm(String vertIniName,String vertFimName) throws InterruptedException {
 
 			//Source: https://gist.github.com/artlovan/a07f29e16ab725f8077157de7abdf125
 			String[][] strPontosDeInteresse=this.getPontosDeInteresse();
-			List<Vertex> g=new ArrayList<Vertex>();
-			  Vertex v1 = new Vertex(strPontosDeInteresse[0][0]);
-			  g.add(v1);
-		        Vertex v2 = new Vertex(strPontosDeInteresse[1][0]);
-		        Vertex v3 = new Vertex(strPontosDeInteresse[2][0]);
-		        g.add(v2);
-		        g.add(v3);
-		        v1.addNeighbour(new Edge(1, v1, v2));
-		        v1.addNeighbour(new Edge(10, v1, v2));
-
-		        v2.addNeighbour(new Edge(1, v2, v3));
-
-		        Dijkstra dijkstra = new Dijkstra();
-		        dijkstra.computePath(v1);
-
-		        String txt=dijkstra.getShortestPathTo(v3).toString();
+			
+			Hashtable<String, Vertex> g=new Hashtable<String, Vertex>();
+			String[] nomes=new String[strPontosDeInteresse.length];
+			//Cria todos vertices
+			for(int i=0;i<strPontosDeInteresse.length;i++) {
+				if(strPontosDeInteresse[i][0]==null) {
+					break;
+				}
+				Vertex v= new Vertex(strPontosDeInteresse[i][0]);
+				nomes[i]=strPontosDeInteresse[i][0];
+				System.out.println("\n\n"+strPontosDeInteresse[i][0]);
+				//Adiciona V no indice que tem o nome do ponto de interesse[i]
+				g.put(strPontosDeInteresse[i][0],v);
+			}
+			//Adiciona as conexões entre vertices
+			 for(int i=0;i<nomes.length;i++) {
+			//	 System.out.print("\n"+resp[i][0]+ "   = "+resp[i][1]);
+				// Vertex V=g.get(nomes[i]);
+				 if(nomes[i]==null) {
+					 break;
+				 }
+				 String[][] conectaCom=this.getConexoesPontosDeInteresse(g.get(nomes[i]).getName());
+				 if(conectaCom==null) {
+					 //Caso nao tenha, entao continua pro proximo
+					 continue;
+				 }
+				 else {
+					 for(int j=0;j<conectaCom.length;j++) {
+						 Vertex m=g.get(conectaCom[j][0]);
+						g.get(nomes[i]).addNeighbour(new Edge(Float.parseFloat(conectaCom[j][1]),g.get(nomes[i]),g.get(conectaCom[j][0])));
+					 }
+				 }
+				 
+			 }
+			 Dijkstra dijkstra = new Dijkstra();
+			 dijkstra.computePath(g.get(vertIniName));
+		
+		        String txt=dijkstra.getShortestPathTo(g.get(vertFimName)).toString();
 		        StringBuilder sb=new StringBuilder();
-		        sb.append("<!DOCTYPE html>\r\n"
-						+ "<html>\r\n"
-						+ "<body>\r\n");
+
 		        sb.append(txt);        
-		        sb.append("</body>\r\n"
-					+ "</html>\r\n"
-					+ "\r\n"
-					+ "");
+		       
 						
 			return sb.toString();
 		}
-		@GetMapping("/dijExemplo")
-		public String dijExemplo() {
-			
-			//Source: https://gist.github.com/artlovan/a07f29e16ab725f8077157de7abdf125
-			
-			  Vertex v1 = new Vertex("A");
-		        Vertex v2 = new Vertex("B");
-		        Vertex v3 = new Vertex("C");
-
-		        v1.addNeighbour(new Edge(1, v1, v2));
-		        v1.addNeighbour(new Edge(10, v1, v2));
-
-		        v2.addNeighbour(new Edge(1, v2, v3));
-
-		        Dijkstra dijkstra = new Dijkstra();
-		        dijkstra.computePath(v1);
-
-		        String txt=dijkstra.getShortestPathTo(v2).toString();
-		        StringBuilder sb=new StringBuilder();
-		        sb.append("<!DOCTYPE html>\r\n"
-						+ "<html>\r\n"
-						+ "<body>\r\n");
-		        sb.append(txt);        
-		        sb.append("</body>\r\n"
-					+ "</html>\r\n"
-					+ "\r\n"
-					+ "");
-						
-			return sb.toString();
-		}
-		/*@GetMapping("/String")
-		public String Vertices() throws InterruptedException {
-			StringBuilder sb=new StringBuilder();
-			sb.append(" "
-						+ "<html>\r\n"
-						+ "<body>\r\n");
-		        sb.append(this.getConexoesPontosDeInteresse("Entrada")[0][0]);
-		        sb.append(this.getConexoesPontosDeInteresse("Entrada")[0][1]);  
-		        sb.append("</body>\r\n"
-					+ "</html>\r\n"
-					+ "\r\n"
-					+ "");
-						
-			return sb.toString();
-		}*/		
+		
 	
 		
 		
@@ -715,6 +678,7 @@ public class restcontroller {
             System.out.println("\n BareURL "+uri+"\n" );
             //Remove a uri do nome
             uri=(uri+"").replace("<"+urlbase+"#RST","");
+            uri=(uri+"").replace("<"+urlbase,"");
             uri=(uri+"").replace(">","");
             uri=(uri+"").replace(nomeConecta,"");
             System.out.println("\n Transformed URL "+sb.toString()+"\n" );
@@ -732,17 +696,27 @@ public class restcontroller {
 		}
 		
 		private String[][] getConexoesPontosDeInteresse(String nomeInteresse) throws InterruptedException {
-			String[][] resp=new String[20][2]; //String array[index] 0-: NomeConectado 1-:Distancia			
-				String[][] resultsQuery=this.genericSearch2("?A", "?B", "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#rdn"+nomeInteresse+">");
-				//Pega todas strings RDN e busca novamente pelo peso
-				for(int in=0;in<resultsQuery.length;in++) {
-					resp[in][0]=CleanRST(resultsQuery[in][0],nomeInteresse);
-				String[][] rq2=this.genericSearch1(UriToURL(resultsQuery[in][0]), "<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#weight>", "?A");
-				resp[in][1]=CleanXSD(rq2[0][0]);
-				}
-
-				return resp;
+			
+			String[][] resultsQuery=this.genericSearch2("?A", "?B", "<"+urlbase+"#rdn"+nomeInteresse+">");
+			if(resultsQuery==null) {
+				return null;
 			}
+			String[][] resp=new String[resultsQuery.length][3]; //String array[index] 0-: NomeConectado 1-:Distancia
+			//Pega todas strings RDN e busca novamente pelo peso
+			for(int in=0;in<resultsQuery.length;in++) {
+			resp[in][0]=CleanRST(resultsQuery[in][0],nomeInteresse);
+			resp[in][0]=resp[in][0].replace(urlbase+"#RST", "");
+			//System.out.println(resultsQuery[in][0]);
+			String[][] rq2=this.genericSearch1(UriToURL(resultsQuery[in][0]), "<"+urlbase+"#weight>", "?A");
+			resp[in][1]=CleanXSD(rq2[0][0]);
+			String[][] rq3=this.genericSearch1(UriToURL(resultsQuery[in][0]), "<"+urlbase+"#direct>", "?A");
+			resp[in][2]=CleanXSD(rq3[0][0]);
+			}
+			/*for(int i=0;i<resp.length;i++) {
+				System.out.print("\n"+resp[i][0]+ "   = "+resp[i][1]);
+			}*/
+			return resp;
+		}
 		
 		
 		
@@ -805,129 +779,15 @@ INSERT DATA{
 		
 		
 		public int[][][] getMapa(String nomeMapa) {
-			//Formato:
-			//[Tipo do grafo][Num Gafo][Valor em Tipo cordenada]
-			//Tipo grafo: 0-: paredes, 1:obstaculos, 2: ponto de andar
-			//Num grafo: Qual o index desse ponto
-			//Tipo de coordenada: 0:coordenada x inicio, 1: coordenada y inicio, 2: coordenada x fim, 3: coordenada y fim
-			int[][][] resp=new int[3][255][4];
-			/*resp[0][0][0]=172;
-			resp[0][0][1]=0;
-			resp[0][0][2]=172;
-			resp[0][0][3]=25;
-			
-			resp[0][1][0]=172;
-			resp[0][1][1]=25;
-			resp[0][1][2]=578;
-			resp[0][1][3]=100;
-			*/
-			//int vi=1;
-		//	String uriParede="<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#Parede"+vi+">";
-			
-			String uriParede;
-			String string="SELECT ?A ?B ?C {?A <"+urlbase+"#uri> ?C}";
-			Query query=QueryFactory.create(string);
-			
-			RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination(urlbase+"/sparql");
-			
-		
-			try(RDFConnectionFuseki conn = (RDFConnectionFuseki) builder.build()) {
-					QueryExecution qe = conn.query(query);
-					
-					ResultSet rsService = qe.execSelect();
-					
-			        do {
-				            QuerySolution qs = rsService.next();
-				            RDFNode uriParedeRaw = qs.get("C");
-				            StringBuilder sb=new StringBuilder();
-				            
-				            
-				            System.out.println("\n BareURL "+uriParedeRaw+"\n \n \n " );
-				            //Remove a uri do nome
-				            uriParede=(uriParedeRaw+"").replace("^^http://www.w3.org/2001/XMLSchema#anyURI","");
-				            uriParede=(uriParede+"").replace("eger","");
-				            sb.append("<");
-				            sb.append(uriParede);
-				            sb.append(">"); //Adiciona abre e fecha
-				            uriParede=sb.toString();
-				            String NumUriParede="";
-				            if(uriParede.toLowerCase().contains("indoorplaning#parede")) {
-				            NumUriParede=(uriParede+"").replace("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#Parede","");
-				            NumUriParede=(NumUriParede+"").replace("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#parede","");
-				            NumUriParede=(NumUriParede+"").replace(">","");
-				            NumUriParede=(NumUriParede+"").replace("<","");
-				            }
-				            else {
-				            	//Não é parede, pode ser um botão
-				            	NumUriParede=(uriParede+"").replace("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#Botão","");
-					            NumUriParede=(NumUriParede+"").replace("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#botao","");
-					            NumUriParede=(NumUriParede+"").replace(">","");
-					            NumUriParede=(NumUriParede+"").replace("<","");
-				            	
-				            	
-				            }
-				            System.out.println("\n ProcessedURL "+NumUriParede+"\n \n \n " );
-				            int vi=Integer.parseInt(NumUriParede);
-				            
-				            
-				            
-			          //Faz uma nova query pra cima dessa uri
-				            
-						            String string2="SELECT ?B ?C {"+uriParede  +" ?B ?C}";
-						            System.out.println(string2);
-									Query query2=QueryFactory.create(string2);
-									
-									RDFConnectionRemoteBuilder builder2 = RDFConnectionFuseki.create().destination("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning/sparql");
-									
-									
-									try(RDFConnectionFuseki conn2 = (RDFConnectionFuseki) builder2.build()) {
-										QueryExecution qe2 = conn2.query(query2);
-										
-										ResultSet rsService2 = qe2.execSelect();
-										 System.out.println("Lendo"+vi);
-								        do {
-								            QuerySolution qs2 = rsService2.next();
-								            RDFNode coordTypeRaw = qs2.get("B");
-								            RDFNode value = qs2.get("C");
-								            //Descibre de que tipo é
-								            String coordType=(coordTypeRaw+"").replace("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#","");
-								            int cType=-1;
-								            if(coordType.equals("gml:posX")) {
-								            	cType=0; 
-								            }
-								            if(coordType.equals("idp:coordenadaYinicio")) {
-								            	cType=1; 
-								            }
-								            if(coordType.equals("idp:coordenadaXFim")) {
-								            	cType=2; 
-								            }
-								            if(coordType.equals("idp:coordenadaYFim")) {
-								            	cType=3; 
-								            }
-								            
-								            System.out.println(""+coordType+ " "+cType);
-								            //Se nao for nenhum tipo,vai para o proximo e nao faz nada
-								            if(cType!=-1) {
-								            	//Remove o XSD:INT do valor
-									            String keylimpa=(value+"").replace("^^http://www.w3.org/2001/XMLSchema#int","");
-								            	keylimpa=(keylimpa+"").replace("eger","");
-									            
-									            System.out.print(keylimpa); 	
-								            	
-									            resp[0][vi][cType]=Integer.parseInt(keylimpa);
-								            }
-								            
-								            
-								        } while (rsService2.hasNext());
-								        conn2.close();    
-									}
-									
-				            
-				        } while (rsService.hasNext());
-			        conn.close();
-			        
+		int[][][] resp=null;
+			 String[][] pa=this.genericSearch1("?B", "<"+urlbase+"#uri>", "?A");
+			if(pa==null) {
+				return resp;
 			}
-			
+			for(int i=0;i<pa.length;i++) {
+			String nome=UriToURL(pa[i][0]);
+			String[][] pa2=this.genericSearch2(nome, "?B", "?A");
+			}
 			
 			return resp;
 		}
@@ -948,7 +808,10 @@ INSERT DATA{
 			QueryExecution qe = conn.query(query);
 			qe.setTimeout(400);
 			ResultSet rsService = qe.execSelect();
-			
+			if(!rsService.hasNext()) {
+				return null;
+				
+			}
 	        do {
 	            QuerySolution qs = rsService.next();     
 	            RDFNode respA = qs.get("A");
@@ -987,7 +850,10 @@ INSERT DATA{
 			QueryExecution qe = conn.query(query);
 			qe.setTimeout(400);
 			ResultSet rsService = qe.execSelect();
-			
+			if(!rsService.hasNext()) {
+				return null;
+				
+			}
 	        do {
 	            QuerySolution qs = rsService.next();     
 	            RDFNode respA = qs.get("A");
@@ -1027,7 +893,10 @@ INSERT DATA{
 			QueryExecution qe = conn.query(query);
 			qe.setTimeout(400);
 			ResultSet rsService = qe.execSelect();
-			
+			if(!rsService.hasNext()) {
+				return null;
+				
+			}
 	        do {
 	            QuerySolution qs = rsService.next();     
 	            RDFNode respB = qs.get("B");
