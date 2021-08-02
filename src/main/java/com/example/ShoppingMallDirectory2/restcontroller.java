@@ -331,11 +331,11 @@ public class restcontroller {
 			this.InsertGenerico(Dele);
 			String Ins="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+"INSERT DATA{	\r\n"
-					+"<"+urlbase+"#"+nomeProduto+"> <"+urlbase+"#hasQuantity> "+novoValor+";}"
+					+"<"+urlbase+"#"+nomeProduto+"> <"+urlbase+"#hasQuantity> "+novoValor+" ;}"
 					;
 			this.InsertGenerico(Ins);
 			
-			return "Insert falhou";
+			return "Op executada";
 		}
 		
 		//Pra fazer
