@@ -53,20 +53,20 @@ public class restcontroller {
 			StringBuilder sb=new StringBuilder();
 			int[][][] intmap=getMapa(nomemapa);
 			//int[][][] intmap=null;
-			String[][] strPontosDeInteresse=this.getPontosDeInteresse();
-			System.out.println(strPontosDeInteresse[0][1]);
+			//String[][] strPontosDeInteresse=this.getPontosDeInteresse();
+			//System.out.println(strPontosDeInteresse[0][1]);
 			
 			sb.append("<!DOCTYPE html>\r\n"
 					+ "<html>\r\n"
 					+ "<body>\r\n"
 					+ "\r\n");
-			for(int i=0;i<255;i++) {
+			/*for(int i=0;i<255;i++) {
 					if(!(strPontosDeInteresse[i][0]==null)) {
 						sb.append(strPontosDeInteresse[i][0]+"<br> \n");
 				//		sb.append(strPontosDeInteresse[i][1]+"<br> \n");
 				//		sb.append(strPontosDeInteresse[i][2]+"<br> \n");
 					}
-				}
+				}*/
 					sb.append("<br><canvas id=\"myCanvas\" width=\"1500\" height=\"1500\"\r\n"
 					+ "style=\"border:1px solid #c3c3c3;\">\r\n"
 					+ "Your browser does not support the canvas element.\r\n"
@@ -77,12 +77,14 @@ public class restcontroller {
 					+ "var ctx = canvas.getContext(\"2d\");\r\n"
 					+ "ctx.lineWidth = 0.3;\r\n");
 			
-			for(int i=0;i<255;i++) {
+			for(int i=0;i<intmap[0].length-1;i++) {
 			
 			sb.append("ctx.moveTo("+intmap[0][i][0]+","+ intmap[0][i][1]+");");
-			sb.append("ctx.lineTo("+intmap[0][i][2]+","+ intmap[0][i][3]+");");
+			System.out.print("ctx.moveTo("+intmap[0][i][0]+","+ intmap[0][i][1]+");");
+			sb.append("ctx.lineTo("+intmap[0][i+1][0]+","+ intmap[0][i+1][1]+");");
+			System.out.print("ctx.lineTo("+intmap[0][i+1][0]+","+ intmap[0][i+1][1]+");");
 			sb.append("ctx.stroke();");
-			sb.append("ctx.moveTo("+strPontosDeInteresse[i][1]+","+ strPontosDeInteresse[i][2]+");");
+			//sb.append("ctx.moveTo("+strPontosDeInteresse[i][1]+","+ strPontosDeInteresse[i][2]+");");
 		//	int a=Integer.parseInt(strPontosDeInteresse[i][1])+3;
 			//int b=Integer.parseInt(strPontosDeInteresse[i][2]);
 		//	sb.append("ctx.moveTo("+a+","+ b+");");
@@ -675,13 +677,13 @@ public class restcontroller {
 			StringBuilder sb=new StringBuilder();
 			//"<http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#RST"+nomeInteresse+""+nomeConecta+">
             
-            System.out.println("\n BareURL "+uri+"\n" );
+            //System.out.println("\n BareURL "+uri+"\n" );
             //Remove a uri do nome
             uri=(uri+"").replace("<"+urlbase+"#RST","");
             uri=(uri+"").replace("<"+urlbase,"");
             uri=(uri+"").replace(">","");
             uri=(uri+"").replace(nomeConecta,"");
-            System.out.println("\n Transformed URL "+sb.toString()+"\n" );
+           // System.out.println("\n Transformed URL "+sb.toString()+"\n" );
 			return sb.toString();
 		}
 		private String CleanXSD(String value) {
@@ -776,17 +778,30 @@ INSERT DATA{
 			return route;
 		}
 		
-		
+		@GetMapping("/testMap")
+		public void tm() {
+			getMapa("");
+		}
 		
 		public int[][][] getMapa(String nomeMapa) {
-		int[][][] resp=null;
+			int[][][] resp=null;
 			 String[][] pa=this.genericSearch1("?B", "<"+urlbase+"#uri>", "?A");
 			if(pa==null) {
 				return resp;
 			}
+			resp=new int[3][pa.length][4];	
 			for(int i=0;i<pa.length;i++) {
-			String nome=UriToURL(pa[i][0]);
-			String[][] pa2=this.genericSearch2(nome, "?B", "?A");
+				String nome=UriToURL(pa[i][0]);
+				String[][] pa2=this.genericSearch2(nome, "?A", "?B");
+				for(int j=0;j<pa2.length;j++) {
+					System.out.println("\nc:      "+CleanXSD(pa2[j][1]));
+					if(pa2[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#gml:PosX")) {
+						resp[0][i][0]=Integer.parseInt(CleanXSD(pa2[j][1]));
+					}
+					else if(pa2[j][0].equals("http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/shoppingmalldirectory2#gml:PosY")) {
+						resp[0][i][1]=Integer.parseInt(CleanXSD(pa2[j][1]));
+					}
+				}
 			}
 			
 			return resp;
@@ -798,7 +813,7 @@ INSERT DATA{
 			String string="SELECT ?A {"+one+" "+two+" "+ three+";}";
 			//String string="SELECT ?A ?C {?A <http://ip-50-62-81-50.ip.secureserver.net:8080/fuseki/indoorplaning#idp:key> ?C}";
 			Query query=QueryFactory.create(string);
-			System.out.print("\n\nGeneric Search tp is:"+string);
+			//System.out.print("\n\nGeneric Search tp is:"+string);
 			
 			 
 			RDFConnectionRemoteBuilder builder = RDFConnectionFuseki.create().destination(urlbase+"/sparql");
