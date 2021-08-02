@@ -323,7 +323,7 @@ public class restcontroller {
 		}
 		//Pra fazer
 		@GetMapping("/RemoveProduto")
-		public void RemoveProduto(@RequestParam(value = "nomeProduto", defaultValue = "Hamburger")  String nomeProduto,@RequestParam(value = "valorNovo", defaultValue = "5")int novoValor) {
+		public String RemoveProduto(@RequestParam(value = "nomeProduto", defaultValue = "Hamburger")  String nomeProduto,@RequestParam(value = "valorNovo", defaultValue = "5")int novoValor) {
 			String Dele="PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n prefix owl: <http://www.w3.org/2002/07/owl#> \n"
 					+"DELETE WHERE{	\r\n"
 					+"<"+urlbase+"#"+nomeProduto+"> <"+urlbase+"#hasQuantity> ?C .}"
@@ -334,6 +334,8 @@ public class restcontroller {
 					+"<"+urlbase+"#"+nomeProduto+"> <"+urlbase+"#hasQuantity> "+novoValor+";}"
 					;
 			this.InsertGenerico(Ins);
+			
+			return "Insert falhou";
 		}
 		
 		//Pra fazer
